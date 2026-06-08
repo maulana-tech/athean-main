@@ -1,0 +1,56 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+  "name": "Athean Trades",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers-contrib/features/pnpm:2": {},
+    "ghcr.io/va-h/devcontainers-features/uv:1": {}
+  },
+  "postCreateCommand": "pnpm install && curl -L https://foundry.paradigm.xyz | bash && ~/.foundry/bin/foundryup",
+  "forwardPorts": [3000, 8000, 5432, 6379, 5001],
+  "portsAttributes": {
+    "3000": { "label": "web (Next.js)", "onAutoForward": "openPreview" },
+    "8000": { "label": "api (FastAPI)" },
+    "5432": { "label": "postgres" },
+    "6379": { "label": "redis" },
+    "5001": { "label": "ipfs" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "charliermarsh.ruff",
+        "bradlc.vscode-tailwindcss",
+        "JuanBlanco.solidity",
+        "tamasfe.even-better-toml",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python3.12",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true
+        },
+        "[typescript]": {
+          "editor.formatOnSave": true
+        },
+        "[typescriptreact]": {
+          "editor.formatOnSave": true
+        }
+      }
+    }
+  },
+  "remoteEnv": {
+    "NEXT_PUBLIC_ARCSCAN_URL": "https://testnet.arcscan.app",
+    "NEXT_PUBLIC_PROOF_OF_RESTRAINT_ADDRESS": "0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895",
+    "NEXT_PUBLIC_VISITOR_WITNESS_ADDRESS": "0xF35B1fa5A6026C61C187881eA17d77F97Cd1AFA7",
+    "NEXT_PUBLIC_TRADE_INTENT_ADDRESS": "0x3a900a5c996ffd76bcfa1a266fbb42307ea7c5cd"
+  }
+}

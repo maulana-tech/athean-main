@@ -1,0 +1,38 @@
+name: contracts
+
+on:
+  # Fires on push to main so the badge in the README reflects the
+  # branch's true state. Without the push trigger, this workflow only
+  # ran on PRs and the badge was permanently "no status" on main even
+  # though forge build + test were passing in the ci.yml flow.
+  push:
+    branches: [main]
+    paths:
+      - "contracts/**"
+      - ".github/workflows/contracts.yml"
+  pull_request:
+    paths:
+      - "contracts/**"
+      - ".github/workflows/contracts.yml"
+
+jobs:
+  forge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      # foundryup hits api.github.com to resolve release tags. Without an
+      # auth token the runner IP shares the 60-req/hr unauth pool and
+      # returns 403 under load. GITHUB_TOKEN bumps us to 5000/hr.
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          # See ci.yml — upstream removed the rolling nightly tag.
+          version: stable
+          # Token must be an action INPUT, not env. Otherwise
+          # foundryup's curl calls hit the unauth 60-req/hr ceiling
+          # and 403 — see the comment in ci.yml for the full story.
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: forge --version
+      - run: forge build --root contracts
+      - run: forge test --root contracts -vv

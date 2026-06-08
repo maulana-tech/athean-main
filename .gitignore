@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# uv / venv
+.venv/
+venv/
+env/
+*.egg
+uv.lock.bak
+
+# Node / pnpm
+node_modules/
+.next/
+.turbo/
+.vercel/
+*.tsbuildinfo
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Local secrets
+.env
+.env.local
+.env.*.local
+
+# Claude Code local state
+.claude/
+
+# Boule LLM response cache — re-runs same prompt without burning quota.
+.cache/
+
+# Foundry
+contracts/cache/
+contracts/out/
+contracts/broadcast/
+
+# Logs
+*.log
+logs/
+
+# Local-only experimental scripts (zero-cost CLI council, etc.) and
+# their artifacts. Kept on the operator's machine for weekly
+# recalibration; never committed.
+scripts/backtest_council_cli.py
+artifacts/sources_brier_cli_*.json
+artifacts/_tmp_council_cli/
+artifacts/_cli_council_*_log.txt

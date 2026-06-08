@@ -1,0 +1,52 @@
+# Pre-commit hooks — install once with `pip install pre-commit && pre-commit install`.
+# Every commit then runs the checks below locally before the commit lands,
+# stopping bad code from ever reaching CI. Cheap insurance.
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=512"]
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.10
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+        files: ^(services|packages|scripts|tests)/
+      - id: ruff-format
+        files: ^(services|packages|scripts|tests)/
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  - repo: local
+    hooks:
+      - id: forge-fmt-check
+        name: forge fmt --check
+        entry: bash -c 'cd contracts && forge fmt --check src test script'
+        language: system
+        files: \.sol$
+        pass_filenames: false
+      - id: agent-prompts-mirror
+        name: agent-prompts mirror check
+        # Confirm the bundled prompts in apps/web/lib/agent-prompts.ts
+        # stay in sync with services/boule/src/boule/prompts/*.md.
+        # The check itself lives at tests/check_agent_prompts.py — it
+        # exits non-zero if any prompt name + first 5 lines mismatch.
+        entry: python tests/check_agent_prompts.py
+        language: system
+        files: ^(apps/web/lib/agent-prompts\.ts|services/boule/src/boule/prompts/)
+        pass_filenames: false

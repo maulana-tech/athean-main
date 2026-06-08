@@ -1,0 +1,292 @@
+import "../styles/globals.css";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Cinzel, Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
+import { RevealProvider } from "@/components/anim";
+import { ChainTicker } from "@/components/chain-ticker";
+import { ThemeToggle, themeInitScript } from "@/components/theme-toggle";
+import { ScrollProgress } from "@/components/widgets";
+import { BRAND_MARK } from "@/lib/cdn";
+import { Providers } from "./providers";
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: "Pantheon Trades — A council of eleven gods debates every trade",
+    template: "%s · Athean Trades",
+  },
+  description:
+    "An eleven-agent AI council debates every Polymarket trade. Every approval — and every restraint — is anchored on Circle's Arc Testnet. Proof of Restraint primitive · 200-market backtest · MIT licensed.",
+  metadataBase: new URL("https://athean-trades.vercel.app"),
+  keywords: [
+    "prediction markets",
+    "Polymarket",
+    "AI trading",
+    "multi-agent",
+    "council deliberation",
+    "Brier score",
+    "calibration",
+    "conformal prediction",
+    "Kelly criterion",
+    "Arc Testnet",
+    "Circle USDC",
+    "smart contracts",
+    "proof of restraint",
+    "no-trade alpha",
+    "Solidity",
+    "Foundry",
+    "Halmos",
+    "open source",
+  ],
+  authors: [{ name: "Athean Trades" }],
+  creator: "Athean Trades",
+  publisher: "Athean Trades",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: "Athean Trades — An eleven-agent AI council debates every trade",
+    description:
+      "Every approval — and every restraint — anchored on Circle's Arc Testnet. Council closes 80% of the LLM-vs-human Brier gap on a 200-market backtest. Try the demo on your own wallet.",
+    type: "website",
+    siteName: "Athean Trades",
+    locale: "en_US",
+    url: "https://athean-trades.vercel.app",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Athean Trades",
+    description:
+      "An eleven-agent AI council debates every prediction-market trade. Discipline is alpha. Restraint is witnessed on Arc Testnet.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://athean-trades.vercel.app",
+  },
+  category: "technology",
+};
+
+/**
+ * JSON-LD structured data — emitted as a <script type="application/ld+json">
+ * inside <head>. Lets Google + LinkedIn + other indexers understand
+ * what this site is. Combines Organization, SoftwareApplication,
+ * and WebSite schemas — Google Rich Results requires all three for
+ * full SERP enrichment.
+ */
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://athean-trades.vercel.app/#org",
+      name: "Athean Trades",
+      url: "https://athean-trades.vercel.app",
+      logo: "https://athean-trades.vercel.app/icon.svg",
+      sameAs: ["https://github.com/NAME0x0/Athean-Trades"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://athean-trades.vercel.app/#site",
+      url: "https://athean-trades.vercel.app",
+      name: "Athean Trades",
+      publisher: { "@id": "https://athean-trades.vercel.app/#org" },
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "Athean Trades",
+      operatingSystem: "Linux, macOS, Windows, Web",
+      applicationCategory: "FinanceApplication",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+      description:
+        "An eleven-agent AI council debates every prediction-market trade before execution. Every refusal is anchored on Circle's Arc Testnet as a Proof of Restraint witness.",
+      author: { "@id": "https://athean-trades.vercel.app/#org" },
+      license: "https://opensource.org/licenses/MIT",
+      softwareRequirements: "Node 20+, Python 3.12, Foundry, uv, pnpm",
+      aggregateRating: undefined,
+    },
+  ],
+};
+
+// Five-item nav: "Overview" lives on the logo (top-left), so it's not
+// repeated as a link. Labels are kept short so the bar doesn't crowd
+// at narrow viewports. Use the `.nav-link` utility for sizing.
+const NAV = [
+  { href: "/demo", label: "Demo" },
+  { href: "/trade", label: "Trade" },
+  { href: "/council", label: "Council" },
+  { href: "/methodology", label: "Methods" },
+  { href: "/counter-evidence", label: "Audit" },
+  { href: "/dashboard", label: "Dashboard" },
+];
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html
+      lang="en"
+      className={`${cinzel.variable} ${cormorant.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* No-flash theme init: runs before React hydrates, sets the
+            class on <html> from localStorage / system preference. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {/* JSON-LD structured data — Google Rich Results + LinkedIn
+            preview enrichment. Inlined so the crawler sees it on
+            first byte without waiting for hydration. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+        />
+      </head>
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+        {/* Wagmi + react-query providers sit at the root so any
+            client component below (/trade especially) can call
+            useAccount / useSignTypedData / useWriteContract without
+            re-wrapping. */}
+        <Providers>
+        {/* Single shared IntersectionObserver for all <Reveal> children
+            on the page. Cuts 85+ duplicate observers down to one and
+            converts the rise+fade from framer-motion springs to a CSS
+            transition (GPU-composited, ~free per frame). */}
+        <RevealProvider>
+          <ScrollProgress />
+          <ChainTicker />
+
+        <header className="sticky top-0 z-40 border-b border-primary/12 bg-background/70 backdrop-blur-xl">
+          <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+            <Link
+              href="/"
+              className="group flex items-center gap-3 transition-opacity hover:opacity-90"
+            >
+              {/* Iconify CDN — gold-tinted Greek temple line art */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={BRAND_MARK}
+                alt="Pantheon Trades emblem"
+                width={34}
+                height={34}
+                className="drop-shadow-[0_0_12px_hsl(var(--primary)/0.25)]"
+              />
+              <div className="flex flex-col leading-none">
+                <span className="display text-base font-semibold tracking-[0.32em] text-foreground">
+                  PANTHEON
+                </span>
+                <span className="display mt-1 text-[10px] font-medium tracking-[0.45em] text-primary">
+                  TRADES
+                </span>
+              </div>
+            </Link>
+            <div className="flex items-center gap-6">
+              <ul className="hidden items-center gap-7 md:flex">
+                {NAV.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="nav-link text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ThemeToggle />
+            </div>
+          </nav>
+        </header>
+
+        <main className="mx-auto max-w-6xl px-6">{children}</main>
+
+        <footer className="mx-auto mt-24 max-w-6xl px-6 pb-12 pt-16">
+          <div className="rule mx-auto mb-10 max-w-xs" />
+          <div className="text-center">
+            <div className="display mb-6 text-[10px] uppercase tracking-[0.45em] text-primary/80">
+              ✦  ΠΑΝΘΕΟΝ  ✦  ΤRADES  ✦
+            </div>
+            <p className="serif mx-auto max-w-xl text-base italic leading-relaxed text-muted-foreground">
+              &ldquo;The council deliberates. Areopagus gates. Parthenon anchors on Arc Testnet.
+              Discipline is alpha. Restraint is witnessed.&rdquo;
+            </p>
+            <div className="mono mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] uppercase tracking-[0.25em] text-muted-foreground/60">
+              <a
+                href="https://github.com/NAME0x0/Pantheon-Trades"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-primary"
+              >
+                Source
+              </a>
+              <span>·</span>
+              <a
+                href="https://testnet.arcscan.app/address/0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-primary"
+              >
+                On Arc
+              </a>
+              <span>·</span>
+              <Link href="/demo" className="transition-colors hover:text-primary">
+                Live demo
+              </Link>
+              <span>·</span>
+              <a
+                href="https://polymarket.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-primary"
+              >
+                Polymarket
+              </a>
+            </div>
+          </div>
+        </footer>
+
+          <Analytics />
+          <SpeedInsights />
+        </RevealProvider>
+        </Providers>
+      </body>
+    </html>
+  );
+}

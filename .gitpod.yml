@@ -1,0 +1,43 @@
+# Athean Trades — Gitpod one-click dev environment.
+# Visit https://gitpod.io/#https://github.com/NAME0x0/Athean-Trades
+# to spin up a browser IDE pre-configured with every dependency.
+# Free tier: 50 hours/month. No local install required.
+
+image: gitpod/workspace-full
+
+tasks:
+  - name: install
+    init: |
+      curl -fsSL https://get.pnpm.io/install.sh | sh -
+      export PNPM_HOME="$HOME/.local/share/pnpm"
+      export PATH="$PNPM_HOME:$PATH"
+      pnpm install
+      curl -L https://foundry.paradigm.xyz | bash
+      ~/.foundry/bin/foundryup
+      pip install --user uv
+    command: |
+      echo "Athean Trades dev environment ready."
+      echo "Run 'pnpm --filter @athean/web dev' to start the web app."
+      echo "Run 'cd contracts && forge test' to verify contracts."
+
+ports:
+  - port: 3000
+    onOpen: open-preview
+    name: web (Next.js)
+  - port: 8000
+    onOpen: ignore
+    name: api (FastAPI)
+  - port: 5432
+    onOpen: ignore
+    name: postgres
+  - port: 6379
+    onOpen: ignore
+    name: redis
+
+vscode:
+  extensions:
+    - ms-python.python
+    - charliermarsh.ruff
+    - bradlc.vscode-tailwindcss
+    - JuanBlanco.solidity
+    - tamasfe.even-better-toml
