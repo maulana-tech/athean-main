@@ -95,3 +95,19 @@ down:
 
 logs service:
     docker compose logs -f {{service}}
+
+# ─── Mantle chain ─────────────────────────────────────────────────────────────
+
+# Smoke-test the Mantle Sepolia RPC wiring (no funds, no signing).
+mantle-probe:
+    uv run python tests/mantle_probe.py
+
+# Deploy contracts to Mantle Sepolia testnet.
+deploy-mantle:
+    forge script --root contracts script/DeployPantheon.s.sol:DeployPantheon \
+        --rpc-url mantle_sepolia --broadcast -vvv
+
+# Deploy ProofOfRestraint to Mantle Sepolia testnet.
+deploy-restraint:
+    forge script --root contracts script/DeployRestraint.s.sol:DeployRestraint \
+        --rpc-url mantle_sepolia --broadcast -vvv

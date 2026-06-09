@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/anim";
 
 /**
- * Dashboard is a server component that talks directly to Arc Testnet
+ * Dashboard is a server component that talks directly to Mantle Sepolia
  * via public JSON-RPC. No FastAPI backend required — the page always
  * has live data the moment the chain is reachable.
  *
@@ -20,13 +20,13 @@ import { Reveal } from "@/components/anim";
 
 export const revalidate = 30;
 
-const ARC_RPC = "https://rpc.testnet.arc.network";
-const ARCSCAN = "https://testnet.arcscan.app";
+const MANTLE_RPC = "https://rpc.sepolia.mantle.xyz";
+const MANTLE_EXPLORER = "https://explorer.sepolia.mantle.xyz";
 const POR_CONTRACT = "0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895";
 const VW_CONTRACT =
   process.env.NEXT_PUBLIC_VISITOR_WITNESS_ADDRESS ??
   "0xF35B1fa5A6026C61C187881eA17d77F97Cd1AFA7";
-const ARC_CHAIN_ID = 5042002;
+const MANTLE_CHAIN_ID = 5003;
 
 // keccak256("Restrained(uint256,bytes32,string,string,string,address,uint64)")
 const RESTRAINED_TOPIC =
@@ -35,7 +35,7 @@ const RESTRAINED_TOPIC =
 const VISITED_TOPIC =
   "0x5c375a1d562e39c417094b3e0b5fe2e49202eaaa8fc9cd51306d6caed52102ce";
 
-// Arc Testnet RPC caps eth_getLogs at a 10,000-block range (error -32614).
+// Mantle Sepolia RPC caps eth_getLogs at a 10,000-block range (error -32614).
 // We scan multiple chunks back from head to cover ~14 hours of testnet
 // activity — enough to surface every recent restraint + visitor witness
 // without tripping the rate-limit.
@@ -65,7 +65,7 @@ type VisitLog = {
 
 async function rpc<T>(method: string, params: unknown[]): Promise<T | null> {
   try {
-    const r = await fetch(ARC_RPC, {
+    const r = await fetch(MANTLE_RPC, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
@@ -173,11 +173,11 @@ export default async function Dashboard() {
                 liveRpc ? "bg-emerald-400 animate-pulse" : "bg-amber-500"
               }`}
             />
-            {liveRpc ? "Arc Testnet · live" : "Arc Testnet · unreachable"}
+            {liveRpc ? "Mantle Sepolia · live" : "Mantle Sepolia · unreachable"}
           </div>
           <h1 className="text-h1 text-foreground">Dashboard</h1>
           <p className="text-lead max-w-2xl text-muted-foreground">
-            Live Arc Testnet read. Every council restraint and every visitor
+            Live Mantle Sepolia read. Every council restraint and every visitor
             witness, indexed straight off chain.
           </p>
           <p className="max-w-2xl rounded-md border border-amber-500/30 bg-amber-500/5 px-4 py-3 text-xs leading-[1.55] text-amber-200/85">
@@ -204,7 +204,7 @@ export default async function Dashboard() {
           <Stat
             label="Chain id"
             value={arc.chainId !== null ? arc.chainId.toString() : "—"}
-            note={arc.chainId === ARC_CHAIN_ID ? "verified" : undefined}
+            note={arc.chainId === MANTLE_CHAIN_ID ? "verified" : undefined}
           />
           <Stat label="Restraints anchored" value={restraints.length.toString()} />
           <Stat label="Demo visits" value={visits.length.toString()} />

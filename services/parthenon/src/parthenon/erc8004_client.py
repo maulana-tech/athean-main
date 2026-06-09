@@ -29,8 +29,8 @@ class Erc8004Config:
 class Erc8004Client:
     def __init__(self, config: Erc8004Config | None = None) -> None:
         self._config = config or Erc8004Config(
-            rpc_url=os.environ.get("RPC_URL", "https://rpc.testnet.arc.network"),
-            chain_id=int(os.environ.get("CHAIN_ID", "5042002")),
+            rpc_url=os.environ.get("RPC_URL", "https://rpc.sepolia.mantle.xyz"),
+            chain_id=int(os.environ.get("CHAIN_ID", "5003")),
             private_key=os.environ["PRIVATE_KEY"],
             registry_address=os.environ["ERC8004_REGISTRY_ADDRESS"],
         )

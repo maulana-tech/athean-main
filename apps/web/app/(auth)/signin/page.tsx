@@ -94,7 +94,7 @@ function buildSiweMessage(address: string, nonce: string): string {
     "",
     `URI: ${origin}`,
     "Version: 1",
-    "Chain ID: 5042002",
+    "Chain ID: 5003",
     `Nonce: ${nonce}`,
     `Issued At: ${issued}`,
   ].join("\n");

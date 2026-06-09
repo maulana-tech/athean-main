@@ -9,7 +9,7 @@
  *
  *   1. Request accounts (eth_requestAccounts).
  *   2. Read + display the current chainId, with a one-click switch
- *      to Arc Testnet (5042002 / 0x4cef52). Add-network fallback if
+ *      to Mantle Sepolia (5003 / 0x4cef52). Add-network fallback if
  *      the wallet rejects with the "chain not added" code 4902.
  *   3. Sign a SIWE-style message (personal_sign). Read-only — we
  *      never submit the signature anywhere; the point is to prove
@@ -27,11 +27,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { errorMessage } from "@/lib/errors";
 
-// Arc Testnet (Pantheon's deploy target). Hex is required by EIP-3326.
-const ARC_CHAIN_ID = 5042002;
-const ARC_CHAIN_HEX = `0x${ARC_CHAIN_ID.toString(16)}`;
-const ARC_RPC = "https://rpc.testnet.arc.network";
-const ARC_EXPLORER = "https://testnet.arcscan.app";
+// Mantle Sepolia (Pantheon's deploy target). Hex is required by EIP-3326.
+const MANTLE_CHAIN_ID = 5003;
+const ARC_CHAIN_HEX = `0x${MANTLE_CHAIN_ID.toString(16)}`;
+const MANTLE_RPC = "https://rpc.sepolia.mantle.xyz";
+const MANTLE_EXPLORER = "https://explorer.sepolia.mantle.xyz";
 
 interface Eip1193 {
   request: (args: { method: string; params?: unknown[] | object }) => Promise<unknown>;
@@ -129,18 +129,18 @@ export function WalletConnect() {
             method: "wallet_addEthereumChain",
             params: [{
               chainId: ARC_CHAIN_HEX,
-              chainName: "Arc Testnet",
+              chainName: "Mantle Sepolia",
               // MetaMask hard-requires 18 for native currency, even though
-              // USDC is 6-dp at the token level. Arc Testnet's RPC returns
+              // USDC is 6-dp at the token level. Mantle Sepolia's RPC returns
               // balances in 18-decimal wei to satisfy the EVM JSON-RPC
               // contract, so the wallet display works out.
               nativeCurrency: { name: "USDC", symbol: "USDC", decimals: 18 },
-              rpcUrls: [ARC_RPC],
-              blockExplorerUrls: [ARC_EXPLORER],
+              rpcUrls: [MANTLE_RPC],
+              blockExplorerUrls: [MANTLE_EXPLORER],
             }],
           });
         } catch (e2: unknown) {
-          setErr(`Add Arc Testnet failed: ${errorMessage(e2)}`);
+          setErr(`Add Mantle Sepolia failed: ${errorMessage(e2)}`);
         }
       } else {
         setErr(`Switch chain rejected: ${errorMessage(e)}`);
@@ -166,7 +166,7 @@ export function WalletConnect() {
       `Confirm wallet connection to the Athean demo. This signature is read-only and never sent to any server.\n\n` +
       `URI: https://athean-trades.vercel.app/demo\n` +
       `Version: 1\n` +
-      `Chain ID: ${ARC_CHAIN_ID}\n` +
+      `Chain ID: ${MANTLE_CHAIN_ID}\n` +
       `Nonce: ${nonce}\n` +
       `Issued At: ${issued}`;
     try {
@@ -191,7 +191,7 @@ export function WalletConnect() {
           </CardTitle>
           {address && (
             <Badge variant={onArc ? "success" : "warning"}>
-              {onArc ? "Arc Testnet" : `Wrong network (${chainId ?? "?"})`}
+              {onArc ? "Mantle Sepolia" : `Wrong network (${chainId ?? "?"})`}
             </Badge>
           )}
         </div>
@@ -199,7 +199,7 @@ export function WalletConnect() {
       <CardContent className="space-y-3">
         <p className="text-xs text-muted-foreground">
           Optional — read-only. The demo never transacts. Connect to see the same SIWE
-          flow the production API uses, switch to Arc Testnet so the on-chain Proof of
+          flow the production API uses, switch to Mantle Sepolia so the on-chain Proof of
           Restraint records render properly, and sign a verification message in your
           wallet.
         </p>
@@ -228,7 +228,7 @@ export function WalletConnect() {
             <div className="flex flex-wrap gap-2">
               {!onArc && (
                 <Button variant="outline" onClick={switchToArc} disabled={busy}>
-                  Switch to Arc Testnet
+                  Switch to Mantle Sepolia
                 </Button>
               )}
               <Button variant="outline" onClick={sign} disabled={busy}>

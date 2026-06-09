@@ -41,7 +41,7 @@ class CircleStackSnapshot:
     # Paymaster — how much USDC the operator pays for one gas tx.
     paymaster_usdc_per_native_unit: float
     """USDC-per-1-wei-of-native-gas. Polled from Circle paymaster
-    publish feed. Defaults to 0.003 (matches Arc Testnet ratios)."""
+    publish feed. Defaults to 0.003 (matches Mantle Sepolia ratios)."""
 
     paymaster_markup_bps: float
     """Markup bps Circle adds on top of the raw native-gas cost when

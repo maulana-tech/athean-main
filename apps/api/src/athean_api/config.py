@@ -13,8 +13,8 @@ class Settings(BaseSettings):
     ipfs_api_url: str = "http://localhost:5001"
     irys_key: str = ""
     private_key: str = ""
-    rpc_url: str = "https://rpc.testnet.arc.network"
-    arc_chain_id: int = 5042002
+    rpc_url: str = "https://rpc.sepolia.mantle.xyz"
+    chain_id: int = 5003
     cors_origins: str = "http://localhost:3000"
     secret_key: str = "change-me-in-production"
     debug: bool = False

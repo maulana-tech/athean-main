@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     template: "%s · Athean Trades",
   },
   description:
-    "An eleven-agent AI council debates every Polymarket trade. Every approval — and every restraint — is anchored on Circle's Arc Testnet. Proof of Restraint primitive · 200-market backtest · MIT licensed.",
+    "An eleven-agent AI council debates every Polymarket trade. Every approval — and every restraint — is anchored on Circle's Mantle Sepolia. Proof of Restraint primitive · 200-market backtest · MIT licensed.",
   metadataBase: new URL("https://athean-trades.vercel.app"),
   keywords: [
     "prediction markets",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     "calibration",
     "conformal prediction",
     "Kelly criterion",
-    "Arc Testnet",
+    "Mantle Sepolia",
     "Circle USDC",
     "smart contracts",
     "proof of restraint",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Athean Trades — An eleven-agent AI council debates every trade",
     description:
-      "Every approval — and every restraint — anchored on Circle's Arc Testnet. Council closes 80% of the LLM-vs-human Brier gap on a 200-market backtest. Try the demo on your own wallet.",
+      "Every approval — and every restraint — anchored on Circle's Mantle Sepolia. Council closes 80% of the LLM-vs-human Brier gap on a 200-market backtest. Try the demo on your own wallet.",
     type: "website",
     siteName: "Athean Trades",
     locale: "en_US",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Athean Trades",
     description:
-      "An eleven-agent AI council debates every prediction-market trade. Discipline is alpha. Restraint is witnessed on Arc Testnet.",
+      "An eleven-agent AI council debates every prediction-market trade. Discipline is alpha. Restraint is witnessed on Mantle Sepolia.",
   },
   robots: {
     index: true,
@@ -139,7 +139,7 @@ const JSON_LD = {
         availability: "https://schema.org/InStock",
       },
       description:
-        "An eleven-agent AI council debates every prediction-market trade before execution. Every refusal is anchored on Circle's Arc Testnet as a Proof of Restraint witness.",
+        "An eleven-agent AI council debates every prediction-market trade before execution. Every refusal is anchored on Circle's Mantle Sepolia as a Proof of Restraint witness.",
       author: { "@id": "https://athean-trades.vercel.app/#org" },
       license: "https://opensource.org/licenses/MIT",
       softwareRequirements: "Node 20+, Python 3.12, Foundry, uv, pnpm",
@@ -244,7 +244,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ✦  ΠΑΝΘΕΟΝ  ✦  ΤRADES  ✦
             </div>
             <p className="serif mx-auto max-w-xl text-base italic leading-relaxed text-muted-foreground">
-              &ldquo;The council deliberates. Areopagus gates. Parthenon anchors on Arc Testnet.
+              &ldquo;The council deliberates. Areopagus gates. Parthenon anchors on Mantle Sepolia.
               Discipline is alpha. Restraint is witnessed.&rdquo;
             </p>
             <div className="mono mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] uppercase tracking-[0.25em] text-muted-foreground/60">
@@ -258,7 +258,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </a>
               <span>·</span>
               <a
-                href="https://testnet.arcscan.app/address/0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895"
+                href="https://explorer.sepolia.mantle.xyz/address/0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-primary"

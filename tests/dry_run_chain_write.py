@@ -1,8 +1,8 @@
-"""Dry-run the Areopagus → ProofOfRestraint chain write against Arc Testnet.
+"""Dry-run the Areopagus → ProofOfRestraint chain write against Mantle Sepolia.
 
 Builds a real ProofOfRestraint payload (curated restraint scenario), calls
 ``RestraintChainWriter.write(proof)`` exactly the way the consumer would,
-and prints the resulting Arcscan link.
+and prints the resulting Mantle Explorer link.
 
     uv run python tests/dry_run_chain_write.py
 
@@ -50,7 +50,7 @@ async def main() -> int:
         print("  Required: PROOF_OF_RESTRAINT_ADDRESS, RPC_URL, PRIVATE_KEY")
         return 1
 
-    print("=== Arc Testnet dry-run ===")
+    print("=== Mantle Sepolia dry-run ===")
     print(f"  contract     : {writer._contract_address}")
     print(f"  rpc          : {writer._rpc_url}")
     print(f"  chain_id     : {writer._chain_id}")
@@ -83,7 +83,7 @@ async def main() -> int:
     print(f"  tx_hash          : {result.tx_hash}")
     print(f"  onchain proof_id : {result.proof_id}")
     print(f"  explorer         : {result.explorer_url}")
-    print("\nThis is the flagship feature firing live on Arc Testnet.")
+    print("\nThis is the flagship feature firing live on Mantle Sepolia.")
     return 0
 
 

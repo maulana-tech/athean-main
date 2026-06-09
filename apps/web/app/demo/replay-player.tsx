@@ -513,7 +513,7 @@ function VerdictCard({ bundle }: { bundle: Bundle }) {
               </div>
               <div className="mt-1 text-xs text-muted-foreground">
                 Areopagus will write this rejection as a cryptographic witness to the{" "}
-                <code className="font-mono">ProofOfRestraint</code> contract on Arc Testnet.
+                <code className="font-mono">ProofOfRestraint</code> contract on Mantle Sepolia.
                 The council declined to trade. The decision is anchored on-chain.
               </div>
             </CardContent>

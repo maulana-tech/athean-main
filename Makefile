@@ -1,5 +1,5 @@
 .PHONY: help install dev build test bench lint syntax forge-build forge-test \
-        compose-up compose-down compose-config db-init arc-probe         deploy-athean \
+        compose-up compose-down compose-config db-init mantle-probe deploy-athean \
         deploy-restraint clean
 
 PYTHON ?= python
@@ -21,12 +21,12 @@ help:
 	@echo "  compose-config  docker compose config (validates yaml)"
 	@echo ""
 	@echo "  db-init         psql -f db/schema.sql"
-	@echo "  arc-probe       hit Arc Testnet RPC via the project's wiring"
+	@echo "  mantle-probe    hit Mantle Sepolia RPC via the project's wiring"
 	@echo ""
 	@echo "  forge-build     forge build --root contracts"
 	@echo "  forge-test      forge test --root contracts"
-	@echo "  deploy-athean broadcast DeployPantheon to Arc Testnet"
-	@echo "  deploy-restraint broadcast DeployRestraint to Arc Testnet"
+	@echo "  deploy-athean broadcast DeployPantheon to Mantle Sepolia"
+	@echo "  deploy-restraint broadcast DeployRestraint to Mantle Sepolia"
 	@echo ""
 	@echo "  clean           remove pycache + node_modules build artifacts"
 
@@ -75,18 +75,18 @@ compose-config:
 db-init:
 	psql $${DATABASE_URL:-postgresql://athean:athean@localhost:5432/athean} -f db/schema.sql
 
-arc-probe:
-	$(PYTHON) tests/arc_probe.py
+mantle-probe:
+	$(PYTHON) tests/mantle_probe.py
 
 deploy-athean:
 	@test -n "$$PRIVATE_KEY" || (echo "PRIVATE_KEY env required" && exit 1)
 	forge script --root contracts script/DeployPantheon.s.sol:DeployPantheon \
-		--rpc-url arc_testnet --broadcast -vvv
+		--rpc-url mantle_sepolia --broadcast -vvv
 
 deploy-restraint:
 	@test -n "$$PRIVATE_KEY" || (echo "PRIVATE_KEY env required" && exit 1)
 	forge script --root contracts script/DeployRestraint.s.sol:DeployRestraint \
-		--rpc-url arc_testnet --broadcast -vvv
+		--rpc-url mantle_sepolia --broadcast -vvv
 
 clean:
 	find . -type d -name __pycache__ -prune -exec rm -rf {} +

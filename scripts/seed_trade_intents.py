@@ -1,4 +1,4 @@
-"""Burst-seed TradeIntent submissions on Arc Testnet.
+"""Burst-seed TradeIntent submissions on Mantle Sepolia.
 
 Generates N ephemeral payer wallets, signs an EIP-712 PaymentAuthorization
 per payer with the TradeIntent's exact domain separator, then has the
@@ -13,8 +13,8 @@ intents without conflicting.
 
 Required env (from .env at repo root):
   - PRIVATE_KEY        — deployer wallet, pays gas + sends each tx
-  - RPC_URL            — Arc Testnet JSON-RPC
-  - CHAIN_ID           — 5042002
+  - RPC_URL            — Mantle Sepolia JSON-RPC
+  - CHAIN_ID           — 5003
   - TRADE_INTENT_ADDRESS — deployed TradeIntent contract
 
 Run:
@@ -36,7 +36,7 @@ from eth_account.messages import encode_typed_data
 from web3 import Web3
 
 ROOT = Path(__file__).resolve().parent.parent
-ARCSCAN = "https://testnet.arcscan.app"
+ARCSCAN = "https://testnet.explorer.sepolia.mantle.xyz"
 
 
 def load_dotenv(path: Path) -> None:

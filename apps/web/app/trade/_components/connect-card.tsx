@@ -30,7 +30,7 @@ export function ConnectCard() {
           </CardTitle>
           {isConnected && (
             <Badge variant={onArc ? "success" : "warning"}>
-              {onArc ? "Arc Testnet" : `Chain ${chainId}`}
+              {onArc ? "Mantle Sepolia" : `Chain ${chainId}`}
             </Badge>
           )}
         </div>
@@ -41,7 +41,7 @@ export function ConnectCard() {
             <p className="text-body text-muted-foreground">
               Pick a connector. MetaMask, Coinbase Wallet, or any
               injected EIP-1193 provider works. The whole flow runs on
-              Arc Testnet, so you cannot lose real money — the
+              Mantle Sepolia, so you cannot lose real money — the
               connectors here are pinned to the test network.
             </p>
             <div className="flex flex-wrap gap-2">
@@ -84,7 +84,7 @@ export function ConnectCard() {
                   disabled={switching}
                   variant="outline"
                 >
-                  {switching ? "Switching…" : "Switch to Arc Testnet"}
+                  {switching ? "Switching…" : "Switch to Mantle Sepolia"}
                 </Button>
               )}
               <Button onClick={() => disconnect()} variant="ghost">

@@ -3,7 +3,7 @@
 Probes correctness + speed without external services:
 
   1. Syntax-check every Python source.
-  2. Live Arc Testnet RPC: chain id, latest block, USDC system contract.
+  2. Live Mantle Sepolia RPC: chain id, latest block, USDC system contract.
   3. Per-service pytest sweep (10 service suites + the integration test).
   4. Microbenchmarks:
        * Apollo score_market throughput
@@ -108,11 +108,11 @@ def bench_syntax() -> Section:
 
 
 # ---------------------------------------------------------------------------
-# 2. Arc Testnet probe
+# 2. Mantle Sepolia probe
 # ---------------------------------------------------------------------------
 
 def bench_arc() -> Section:
-    _hr("arc testnet probe")
+    _hr("mantle sepolia probe")
     section = Section(title="arc")
     try:
         from athean_api.config import settings

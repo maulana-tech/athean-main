@@ -13,7 +13,7 @@ class ProofOfRestraint:
     """On-chain witness that a signal was observed but the trade was
     declined.
 
-    Submitted to ``ProofOfRestraint.sol`` on Arc Testnet via
+    Submitted to ``ProofOfRestraint.sol`` on Mantle Sepolia via
     :class:`areopagus.chain.RestraintChainWriter` — see ``declineTrade``
     for the calldata shape this object renders into.
     """

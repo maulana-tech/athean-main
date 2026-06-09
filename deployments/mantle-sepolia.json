@@ -1,0 +1,41 @@
+{
+  "chain": "mantle-sepolia",
+  "chain_id": 5003,
+  "rpc_url": "https://rpc.sepolia.mantle.xyz",
+  "explorer": "https://explorer.sepolia.mantle.xyz",
+  "deployed_at": "",
+  "deployer": "",
+  "note": "Run `just deploy-mantle` then `just deploy-restraint` to populate this file.",
+  "contracts": {
+    "PantheonConstitution": {
+      "address": "",
+      "tx": "",
+      "block": null,
+      "version": "1.0.0",
+      "sealed_at": null,
+      "constructor_args": []
+    },
+    "ThesisRegistry": {
+      "address": "",
+      "tx": "",
+      "block": null,
+      "admin": "",
+      "constructor_args": []
+    },
+    "SignalRegistry": {
+      "address": "",
+      "admin": "",
+      "constructor_args": []
+    },
+    "ProofOfRestraint": {
+      "address": "",
+      "admin": "",
+      "constructor_args": []
+    },
+    "NoTradeAlpha": {
+      "address": "",
+      "admin": "",
+      "constructor_args": []
+    }
+  }
+}

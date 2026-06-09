@@ -40,11 +40,11 @@ import {
   toHex,
 } from "viem";
 
-/** EIP-712 domain — anchored to Arc Testnet + TradeIntent contract. */
+/** EIP-712 domain — anchored to Mantle Sepolia + TradeIntent contract. */
 export const X402_DOMAIN = {
   name: "AtheanTrades.x402",
   version: "1",
-  chainId: 5042002,
+  chainId: 5003,
   // TradeIntent contract address — populated after deploy.
   verifyingContract: "0x0000000000000000000000000000000000000000" as Address,
 } as const;

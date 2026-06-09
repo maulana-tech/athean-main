@@ -4,19 +4,20 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 /**
- * Top-of-page on-chain ticker. Polls Arc Testnet via JSON-RPC for
+ * Top-of-page on-chain ticker. Polls Mantle Sepolia via JSON-RPC for
  * the current block number, shows the live counter, and links the
- * very first ProofOfRestraint witness (proof_id=1) to Arcscan.
+ * first ProofOfRestraint witness to the Mantle explorer.
  *
  * Server-friendly: degrades gracefully on RPC failure — block height
  * just stays static.
  */
 
-const ARC_RPC = "https://rpc.testnet.arc.network";
-const ARCSCAN = "https://testnet.arcscan.app";
+const MANTLE_RPC = "https://rpc.sepolia.mantle.xyz";
+const MANTLE_EXPLORER = "https://explorer.sepolia.mantle.xyz";
 const FIRST_PROOF_TX =
-  "0xf9ae0e7ba73ecaece1af840b20e2ef5a20868df960e62ba238e53a828dfa4edb";
-const POR_CONTRACT = "0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895";
+  process.env.NEXT_PUBLIC_FIRST_PROOF_TX ?? "";
+const POR_CONTRACT =
+  process.env.NEXT_PUBLIC_PROOF_OF_RESTRAINT_ADDRESS ?? "";
 
 export function ChainTicker() {
   const [block, setBlock] = useState<number | null>(null);
@@ -28,7 +29,7 @@ export function ChainTicker() {
 
     async function fetchBlock() {
       try {
-        const r = await fetch(ARC_RPC, {
+        const r = await fetch(MANTLE_RPC, {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
@@ -67,7 +68,7 @@ export function ChainTicker() {
             animate={pulse ? { scale: [1, 2, 1], opacity: [1, 0.6, 1] } : {}}
             transition={{ duration: 0.8 }}
           />
-          <span className="hidden sm:inline">Arc Testnet · live</span>
+          <span className="hidden sm:inline">Mantle Sepolia · live</span>
           <span className="sm:hidden">live</span>
           <span className="opacity-50">·</span>
           <span>
@@ -79,7 +80,7 @@ export function ChainTicker() {
         </div>
 
         <a
-          href={`${ARCSCAN}/tx/${FIRST_PROOF_TX}`}
+          href={`${MANTLE_EXPLORER}/tx/${FIRST_PROOF_TX}`}
           target="_blank"
           rel="noopener noreferrer"
           className="mono group hidden items-center gap-2 text-muted-foreground transition-colors hover:text-primary md:flex"
@@ -102,7 +103,7 @@ export function ChainTicker() {
         </a>
 
         <a
-          href={`${ARCSCAN}/address/${POR_CONTRACT}`}
+          href={`${MANTLE_EXPLORER}/address/${POR_CONTRACT}`}
           target="_blank"
           rel="noopener noreferrer"
           className="mono text-muted-foreground transition-colors hover:text-primary"

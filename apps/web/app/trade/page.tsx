@@ -7,7 +7,7 @@
  * toward: a wallet connect, a one-time session-key authorisation,
  * a market-input form that quotes the council's EV-gate output, and
  * a final sign-and-submit step that posts an x402 PaymentAuthorization
- * to the TradeIntent contract on Arc Testnet. Same theme tokens as
+ * to the TradeIntent contract on Mantle Sepolia. Same theme tokens as
  * the rest of the site (text-h1 / text-lead / Card / Badge), so it
  * lands as part of the same product, not a bolt-on.
  *
@@ -46,7 +46,7 @@ export default function TradePage() {
     <div className="space-y-12 py-10">
       <header className="space-y-5">
         <span className="text-caption text-primary">
-          Trade · Arc Testnet · x402 + session keys
+          Trade · Mantle Sepolia · x402 + session keys
         </span>
         <h1 className="text-h1 text-foreground">
           Run the council against a market.
@@ -71,7 +71,7 @@ export default function TradePage() {
         </CardHeader>
         <CardContent className="space-y-3">
           <p className="text-body text-muted-foreground">
-            This is the Arc Testnet operator flow. Nothing here touches a
+            This is the Mantle Sepolia operator flow. Nothing here touches a
             real Polymarket order book or a mainnet wallet. Confirm each
             item below before clicking Step 1, otherwise the wallet
             popups will read confusing.
@@ -85,10 +85,10 @@ export default function TradePage() {
             <li>
               <span className="text-foreground">Network:</span> Arc
               Testnet (chain&nbsp;
-              <code className="font-mono text-primary">5042002</code>,
+              <code className="font-mono text-primary">5003</code>,
               RPC&nbsp;
               <code className="font-mono text-primary">
-                https://rpc.testnet.arc.network
+                https://rpc.sepolia.mantle.xyz
               </code>
               ). Step 1 will add it for you on first connect — accept the
               prompt.
@@ -103,7 +103,7 @@ export default function TradePage() {
                 rel="noopener noreferrer"
                 className="text-primary underline-offset-4 hover:underline"
               >
-                Arc Testnet faucet
+                Mantle Sepolia faucet
               </a>
               &nbsp;if your balance is empty.
             </li>

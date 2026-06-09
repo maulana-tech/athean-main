@@ -1,4 +1,4 @@
-"""Hermes RPC client — read-only Arc Testnet probes."""
+"""Hermes RPC client — read-only Mantle Sepolia probes."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import httpx
 @dataclass
 class RpcClient:
     http: httpx.AsyncClient
-    rpc_url: str = os.environ.get("RPC_URL", "https://rpc.testnet.arc.network")
+    rpc_url: str = os.environ.get("RPC_URL", "https://rpc.sepolia.mantle.xyz")
 
     async def _call(self, method: str, params: list | None = None) -> dict:
         r = await self.http.post(

@@ -37,7 +37,7 @@ const HeroScene = dynamic(() => import("@/components/hero-scene"), {
 
 const FIRST_PROOF_TX =
   "0xf9ae0e7ba73ecaece1af840b20e2ef5a20868df960e62ba238e53a828dfa4edb";
-const ARCSCAN_BASE = "https://testnet.arcscan.app";
+const MANTLE_EXPLORER_BASE = "https://explorer.sepolia.mantle.xyz";
 
 const AGENTS = [
   { name: "Apollo",     greek: "ΑΠΟΛΛΩΝ",        role: "Sees the future. Scores Polymarket signals." },
@@ -237,7 +237,7 @@ export default function Home() {
             <Reveal y={12}>
               <div className="display flex items-center gap-3 text-[10px] uppercase tracking-[0.45em] text-primary">
                 <span className="inline-block size-1.5 rounded-full bg-primary animate-pulse" />
-                Arc Testnet · chain 5042002
+                Mantle Sepolia · chain 5003
               </div>
             </Reveal>
 
@@ -367,7 +367,7 @@ export default function Home() {
             argue the long case. The bears challenge it. The risk triad —
             Zeus, Solon, Themis — checks the constitution. Athena synthesises.
             Then the council votes. The verdict, whether to trade or to refuse,
-            is anchored as a cryptographic witness on Circle&apos;s Arc Testnet.
+            is anchored as a cryptographic witness on Circle&apos;s Mantle Sepolia.
             Discipline becomes auditable. Restraint becomes provable. The
             chain remembers what we chose not to do.
           </p>
@@ -553,7 +553,7 @@ export default function Home() {
                 <KV k="contract" v="0x4b35…4895" />
               </div>
               <a
-                href={`${ARCSCAN_BASE}/tx/${FIRST_PROOF_TX}`}
+                href={`${MANTLE_EXPLORER_BASE}/tx/${FIRST_PROOF_TX}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="display mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-primary transition-opacity hover:opacity-80"
@@ -765,7 +765,7 @@ export default function Home() {
           {[
             { k: "Council",    v: "Claude · Gemini" },
             { k: "Markets",    v: "Polymarket CLOB" },
-            { k: "Chain",      v: "Arc Testnet" },
+            { k: "Chain",      v: "Mantle Sepolia" },
             { k: "Storage",    v: "IPFS · Irys" },
             { k: "Backend",    v: "FastAPI · Redis" },
             { k: "Contracts",  v: "Solidity 0.8.24" },
@@ -866,7 +866,7 @@ function HeroStat({ value, label }: { value: number; label: string }) {
 
 /**
  * Live witness count — calls the deployed ProofOfRestraint contract
- * on Arc Testnet via a single eth_call. Fallback to 1 (the first
+ * on Mantle Sepolia via a single eth_call. Fallback to 1 (the first
  * canonical witness at block 42,337,549) if the RPC is unreachable
  * or the contract is not deployed in the current environment.
  *
@@ -879,7 +879,7 @@ function LiveWitnessStat() {
   const fallback = 1;
 
   useEffect(() => {
-    const rpc = "https://rpc.testnet.arc.network";
+    const rpc = "https://rpc.sepolia.mantle.xyz";
     const contract = "0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895";
     // function selector for nextProofId() → 0x...; precompute keccak("nextProofId()")[:4]
     // = 0x6a627842. Standard ABI; safe to hardcode.

@@ -30,7 +30,7 @@ async def health() -> None:
         print(f"ipfs ok: probe cid {cid}")
     finally:
         await ipfs.close()
-    rpc = os.environ.get("RPC_URL", "https://rpc.testnet.arc.network")
+    rpc = os.environ.get("RPC_URL", "https://rpc.sepolia.mantle.xyz")
     print(f"rpc_url: {rpc}")
     print(f"registry: {os.environ.get('PARTHENON_REGISTRY_ADDRESS', '(unset)')}")
 

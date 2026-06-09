@@ -53,7 +53,7 @@ export default async function OG() {
                 backgroundColor: "#d4a85e",
               }}
             />
-            Pantheon Trades · Arc Testnet · chain 5042002
+            Pantheon Trades · Mantle Sepolia · chain 5003
           </div>
           <div
             style={{
@@ -80,7 +80,7 @@ export default async function OG() {
               fontStyle: "italic",
             }}
           >
-            Every approval — and every restraint — is anchored on Circle&apos;s Arc Testnet.
+            Every approval — and every restraint — is anchored on Circle&apos;s Mantle Sepolia.
             No-trade alpha, made auditable.
           </div>
           <div

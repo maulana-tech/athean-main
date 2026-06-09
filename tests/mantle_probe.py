@@ -1,6 +1,6 @@
-"""End-to-end Arc Testnet smoke test.
+"""End-to-end Mantle Sepolia smoke test.
 
-Exercises the project's web3 wiring against the live Arc Testnet RPC:
+Exercises the project's web3 wiring against the live Mantle Sepolia RPC:
 
   1. Loads settings via the project's athean_api.config so the same
      code path that the FastAPI gateway uses is what we test.
@@ -30,7 +30,7 @@ sys.path.insert(0, str(ROOT / "packages" / "pantheon-core" / "src"))
 sys.path.insert(0, str(ROOT / "services" / "parthenon" / "src"))
 
 
-# Arc Testnet's native-USDC system contract.
+# Mantle Sepolia's native-USDC system contract.
 USDC_ADDRESS = "0x3600000000000000000000000000000000000000"
 
 USDC_ABI = [
@@ -184,23 +184,23 @@ def step_anchor_config() -> None:
     os.environ.setdefault("PRIVATE_KEY", "0x" + "11" * 32)
     os.environ.setdefault("PARTHENON_REGISTRY_ADDRESS", "0x" + "ab" * 20)
     os.environ.setdefault("ERC8004_REGISTRY_ADDRESS", "0x" + "cd" * 20)
-    os.environ.setdefault("CHAIN_ID", "5042002")
+    os.environ.setdefault("CHAIN_ID", "5003")
 
     a = AnchorConfig(
-        rpc_url=os.environ.get("RPC_URL", "https://rpc.testnet.arc.network"),
+        rpc_url=os.environ.get("RPC_URL", "https://rpc.sepolia.mantle.xyz"),
         chain_id=int(os.environ["CHAIN_ID"]),
         private_key=os.environ["PRIVATE_KEY"],
         registry_address=os.environ["PARTHENON_REGISTRY_ADDRESS"],
     )
     e = Erc8004Config(
-        rpc_url=os.environ.get("RPC_URL", "https://rpc.testnet.arc.network"),
+        rpc_url=os.environ.get("RPC_URL", "https://rpc.sepolia.mantle.xyz"),
         chain_id=int(os.environ["CHAIN_ID"]),
         private_key=os.environ["PRIVATE_KEY"],
         registry_address=os.environ["ERC8004_REGISTRY_ADDRESS"],
     )
     print(f"AnchorConfig    chain_id={a.chain_id} registry={a.registry_address}")
     print(f"Erc8004Config   chain_id={e.chain_id} registry={e.registry_address}")
-    assert a.chain_id == 5042002 and e.chain_id == 5042002
+    assert a.chain_id == 5003 and e.chain_id == 5003
 
 
 def main() -> int:
@@ -215,7 +215,7 @@ def main() -> int:
     except Exception as e:
         print(f"\nERROR: {e!r}")
         return 2
-    print("\nArc Testnet probe OK")
+    print("\nMantle Sepolia probe OK")
     return 0
 
 

@@ -4,7 +4,7 @@
  * WitnessButton — visitor-driven on-chain proof that they ran the demo.
  *
  * Calls `VisitorWitness.witness(bytes32 visitHash, string scenario)` on
- * Arc Testnet via the injected EIP-1193 provider (same plumbing as the
+ * Mantle Sepolia via the injected EIP-1193 provider (same plumbing as the
  * neighbouring WalletConnect card — zero deps, no wagmi/viem). The
  * visitHash is a SHA-256 of (address || scenario || now) computed by
  * Web Crypto, so each click is unique without needing a Keccak library.
@@ -15,7 +15,7 @@
  *                                                  └─→ error
  *
  * The contract is permissionless (no role gating) — see contracts/src/
- * VisitorWitness.sol. Gas cost on Arc Testnet is fractions of a cent in
+ * VisitorWitness.sol. Gas cost on Mantle Sepolia is fractions of a cent in
  * USDC (Arc's native gas token). Faucet link below the button.
  */
 
@@ -26,10 +26,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { errorMessage } from "@/lib/errors";
 
-const ARC_CHAIN_ID = 5042002;
-const ARC_CHAIN_HEX = `0x${ARC_CHAIN_ID.toString(16)}`;
-const ARC_RPC = "https://rpc.testnet.arc.network";
-const ARC_EXPLORER = "https://testnet.arcscan.app";
+const MANTLE_CHAIN_ID = 5003;
+const ARC_CHAIN_HEX = `0x${MANTLE_CHAIN_ID.toString(16)}`;
+const MANTLE_RPC = "https://rpc.sepolia.mantle.xyz";
+const MANTLE_EXPLORER = "https://explorer.sepolia.mantle.xyz";
 
 const VISITOR_WITNESS_ADDRESS =
   process.env.NEXT_PUBLIC_VISITOR_WITNESS_ADDRESS ??
@@ -45,7 +45,7 @@ async function fetchWalletVisitCount(address: string): Promise<number | null> {
   const padded = address.toLowerCase().replace(/^0x/, "").padStart(64, "0");
   const data = "0x" + VISITS_SELECTOR + padded;
   try {
-    const r = await fetch(ARC_RPC, {
+    const r = await fetch(MANTLE_RPC, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -115,7 +115,7 @@ async function waitForReceipt(txHash: string, timeoutMs = 60_000): Promise<{
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     try {
-      const r = await fetch(ARC_RPC, {
+      const r = await fetch(MANTLE_RPC, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -153,8 +153,8 @@ async function waitForReceipt(txHash: string, timeoutMs = 60_000): Promise<{
 
 export function WitnessButton({
   scenario,
-  title = "Run this demo on Arc Testnet",
-  helper = "What this proves: the Arc Testnet pipeline works for visitors end-to-end (wallet → contract → arcscan → dashboard feed). What it does NOT prove: that the council picks profitable trades. See the empirical backtest panel below for that. Cost: fractions of a cent in testnet USDC.",
+  title = "Run this demo on Mantle Sepolia",
+  helper = "What this proves: the Mantle Sepolia pipeline works for visitors end-to-end (wallet → contract → arcscan → dashboard feed). What it does NOT prove: that the council picks profitable trades. See the empirical backtest panel below for that. Cost: fractions of a cent in testnet USDC.",
 }: {
   scenario: string;
   title?: string;
@@ -251,14 +251,14 @@ export function WitnessButton({
               params: [
                 {
                   chainId: ARC_CHAIN_HEX,
-                  chainName: "Arc Testnet",
+                  chainName: "Mantle Sepolia",
                   // MetaMask hard-requires 18 for native currency, even
-                  // though USDC is 6-dp at the token level. Arc Testnet's
+                  // though USDC is 6-dp at the token level. Mantle Sepolia's
                   // RPC returns balances in 18-decimal wei to satisfy the
                   // EVM JSON-RPC contract, so the wallet display works out.
                   nativeCurrency: { name: "USDC", symbol: "USDC", decimals: 18 },
-                  rpcUrls: [ARC_RPC],
-                  blockExplorerUrls: [ARC_EXPLORER],
+                  rpcUrls: [MANTLE_RPC],
+                  blockExplorerUrls: [MANTLE_EXPLORER],
                 },
               ],
             });
@@ -299,7 +299,7 @@ export function WitnessButton({
       if (code === 4001) {
         message = "You rejected the request in your wallet.";
       } else if (code === 4902) {
-        message = "Arc Testnet isn't added to your wallet, and the add-network prompt was rejected.";
+        message = "Mantle Sepolia isn't added to your wallet, and the add-network prompt was rejected.";
       } else if (code === -32603) {
         message = `Wallet RPC error: ${errorMessage(e)}. Try refreshing or switching wallets.`;
       } else {
@@ -318,7 +318,7 @@ export function WitnessButton({
           </CardTitle>
           {address && (
             <Badge variant={onArc ? "success" : "warning"}>
-              {onArc ? "Arc Testnet" : `Chain ${chainId ?? "?"}`}
+              {onArc ? "Mantle Sepolia" : `Chain ${chainId ?? "?"}`}
             </Badge>
           )}
         </div>
@@ -372,7 +372,7 @@ export function WitnessButton({
           <div className="space-y-3 rounded-md border border-emerald-500/40 bg-emerald-500/10 p-4 text-sm text-emerald-100">
             <div className="flex items-baseline justify-between">
               <span className="font-mono uppercase tracking-wider text-emerald-300">
-                ✓ Recorded on Arc Testnet
+                ✓ Recorded on Mantle Sepolia
               </span>
               {status.proofId !== null && (
                 <span className="font-mono text-xs text-emerald-200">
@@ -386,7 +386,7 @@ export function WitnessButton({
               its next 30 s revalidate.
             </p>
             <a
-              href={`${ARC_EXPLORER}/tx/${status.txHash}`}
+              href={`${MANTLE_EXPLORER}/tx/${status.txHash}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 font-mono text-xs text-emerald-300 underline-offset-4 hover:underline"

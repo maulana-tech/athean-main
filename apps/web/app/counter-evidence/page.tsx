@@ -222,7 +222,7 @@ export default function CounterEvidencePage() {
           </h2>
           <p className="text-body max-w-3xl text-muted-foreground">
             Every time the council refuses a trade, the refusal is anchored
-            on Arc Testnet as a Proof of Restraint record. When the underlying
+            on Mantle Sepolia as a Proof of Restraint record. When the underlying
             market later resolves, we can audit whether the refusal saved
             money or cost opportunity. This is the no-trade-alpha accountability
             ledger — and the most important measurement of the system.

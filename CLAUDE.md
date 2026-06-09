@@ -109,8 +109,10 @@ Copy `.env.example` before running. Key variables:
 - `REDIS_URL` — pub/sub and cache
 - `IPFS_API_URL` — IPFS node
 - `IRYS_KEY` — Irys bundler for permanent storage
-- `PRIVATE_KEY` — Polygon/Arc wallet
-- `RPC_URL` — Arc Testnet RPC
+- `PRIVATE_KEY` — Mantle wallet (holds MNT for gas)
+- `RPC_URL` — Mantle Sepolia: `https://rpc.sepolia.mantle.xyz`
+- `CHAIN_ID` — `5003` (Mantle Sepolia) or `5000` (Mantle mainnet)
+- `BYBIT_API_KEY` / `BYBIT_API_SECRET` — Bybit V5 CEX execution
 - `BOULE_LLM_PROVIDER` — LLM backend for the council
 - `EXECUTION_MODE` — `paper` / `live` / `auto`
 

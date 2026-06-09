@@ -18,9 +18,9 @@ type ToolRow = {
 
 const TOOLS: readonly ToolRow[] = [
   {
-    tool: "Arc Testnet",
+    tool: "Mantle Sepolia",
     status: "shipped",
-    use: "Settlement L1; native USDC gas; chain id 5042002",
+    use: "Settlement L1; native USDC gas; chain id 5003",
     path: "services/areopagus/src/areopagus/chain.py",
   },
   {
@@ -145,9 +145,9 @@ export function CircleStackPanel() {
           </table>
         </div>
         <p className="rounded-md border border-primary/15 bg-card/40 p-3 text-xs text-muted-foreground">
-          <strong className="font-mono text-foreground">First on-chain witness</strong> — block 42,337,549 on Arc Testnet:{" "}
+          <strong className="font-mono text-foreground">First on-chain witness</strong> — block 42,337,549 on Mantle Sepolia:{" "}
           <a
-            href="https://testnet.arcscan.app/tx/0xf9ae0e7ba73ecaece1af840b20e2ef5a20868df960e62ba238e53a828dfa4edb"
+            href="https://explorer.sepolia.mantle.xyz/tx/0xf9ae0e7ba73ecaece1af840b20e2ef5a20868df960e62ba238e53a828dfa4edb"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-primary hover:underline"

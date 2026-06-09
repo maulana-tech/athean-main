@@ -3,8 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 /**
- * FaucetCard — drip-feed Arc Testnet USDC to a visitor's wallet so they
- * can pay gas for the WitnessButton tx. Arc Testnet uses USDC as native
+ * FaucetCard — drip-feed Mantle Sepolia USDC to a visitor's wallet so they
+ * can pay gas for the WitnessButton tx. Mantle Sepolia uses USDC as native
  * gas, so a single faucet drip covers both gas AND any future contract
  * interactions. Card is purely informational — clicking opens the
  * official faucets in a new tab.
@@ -23,7 +23,7 @@ export function FaucetCard() {
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-sm leading-[1.6] text-muted-foreground">
-          Arc Testnet uses USDC as native gas. Circle&apos;s developer faucet drips
+          Mantle Sepolia uses USDC as native gas. Circle&apos;s developer faucet drips
           free testnet USDC to any wallet — no real funds required. Each demo
           witness tx costs less than one US cent and is 100% covered by the drip.
         </p>

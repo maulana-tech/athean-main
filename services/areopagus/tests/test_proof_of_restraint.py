@@ -51,7 +51,7 @@ def test_abi_includes_decline_trade():
 
 def test_from_env_requires_address(monkeypatch):
     monkeypatch.delenv("PROOF_OF_RESTRAINT_ADDRESS", raising=False)
-    monkeypatch.setenv("RPC_URL", "https://rpc.testnet.arc.network")
+    monkeypatch.setenv("RPC_URL", "https://rpc.sepolia.mantle.xyz")
     monkeypatch.setenv("PRIVATE_KEY", "0x" + "11" * 32)
     assert RestraintChainWriter.from_env() is None
 
@@ -65,19 +65,19 @@ def test_from_env_requires_rpc(monkeypatch):
 
 def test_from_env_requires_private_key(monkeypatch):
     monkeypatch.setenv("PROOF_OF_RESTRAINT_ADDRESS", "0x" + "ab" * 20)
-    monkeypatch.setenv("RPC_URL", "https://rpc.testnet.arc.network")
+    monkeypatch.setenv("RPC_URL", "https://rpc.sepolia.mantle.xyz")
     monkeypatch.setenv("PRIVATE_KEY", "")
     assert RestraintChainWriter.from_env() is None
 
 
 def test_from_env_builds_writer(monkeypatch):
     monkeypatch.setenv("PROOF_OF_RESTRAINT_ADDRESS", "0x" + "ab" * 20)
-    monkeypatch.setenv("RPC_URL", "https://rpc.testnet.arc.network")
+    monkeypatch.setenv("RPC_URL", "https://rpc.sepolia.mantle.xyz")
     monkeypatch.setenv("PRIVATE_KEY", "0x" + "11" * 32)
-    monkeypatch.setenv("CHAIN_ID", "5042002")
+    monkeypatch.setenv("CHAIN_ID", "5003")
     writer = RestraintChainWriter.from_env()
     assert writer is not None
-    assert writer._chain_id == 5042002
+    assert writer._chain_id == 5003
 
 
 def test_write_rejects_bad_signal_hash(monkeypatch):
@@ -93,7 +93,7 @@ def test_write_rejects_bad_signal_hash(monkeypatch):
         rpc_url="http://localhost",
         contract_address="0x" + "ab" * 20,
         private_key="0x" + "11" * 32,
-        chain_id=5042002,
+        chain_id=5003,
     )
     # Pre-populate so _ensure_client is a no-op.
     writer._w3 = SimpleNamespace()
@@ -125,7 +125,7 @@ def test_write_returns_none_on_rpc_failure(monkeypatch):
         rpc_url="http://localhost",
         contract_address="0x" + "ab" * 20,
         private_key="0x" + "11" * 32,
-        chain_id=5042002,
+        chain_id=5003,
     )
     writer._w3 = _BoomW3()
     writer._contract = SimpleNamespace()

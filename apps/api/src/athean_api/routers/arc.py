@@ -1,4 +1,4 @@
-"""Arc Testnet status router — surfaces chain health to the dashboard."""
+"""Mantle chain status router — surfaces chain health to the dashboard."""
 
 from __future__ import annotations
 
@@ -31,11 +31,11 @@ async def arc_status(user: UserDep) -> dict:
             )
             gas_resp.raise_for_status()
         except httpx.HTTPError as e:
-            raise HTTPException(status_code=502, detail=f"arc rpc failed: {e}")
+            raise HTTPException(status_code=502, detail=f"mantle rpc failed: {e}")
 
     return {
         "rpc_url": settings.rpc_url,
-        "expected_chain_id": settings.arc_chain_id,
+        "expected_chain_id": settings.chain_id,
         "chain_id": int(chain_id_resp.json()["result"], 16),
         "block_number": int(block_resp.json()["result"], 16),
         "gas_price_wei": int(gas_resp.json()["result"], 16),

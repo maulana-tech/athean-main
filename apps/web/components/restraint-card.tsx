@@ -30,12 +30,11 @@ const REASON_AGENT: Record<string, string> = {
   DRAWDOWN_PAUSE: "Olympus",
 };
 
-const ARCSCAN_BASE =
-  process.env.NEXT_PUBLIC_ARCSCAN_URL ?? "https://testnet.arcscan.app";
+const MANTLE_EXPLORER_BASE =
+  process.env.NEXT_PUBLIC_MANTLE_EXPLORER_URL ?? "https://explorer.sepolia.mantle.xyz";
 
 const PROOF_OF_RESTRAINT_ADDRESS =
-  process.env.NEXT_PUBLIC_PROOF_OF_RESTRAINT_ADDRESS ??
-  "0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895";
+  process.env.NEXT_PUBLIC_PROOF_OF_RESTRAINT_ADDRESS ?? "";
 
 export function RestraintCard({ entry }: { entry: RestraintSummary }) {
   const label = REASON_LABEL[entry.reason_code] ?? entry.reason_code.toLowerCase();
@@ -73,24 +72,24 @@ export function RestraintCard({ entry }: { entry: RestraintSummary }) {
           {entry.signal_hash}
         </dd>
 
-        <dt className="text-pantheon-marble/70">Arc proof</dt>
+        <dt className="text-pantheon-marble/70">Mantle proof</dt>
         <dd>
           {entry.explorer_url || entry.tx_hash ? (
             <Link
-              href={entry.explorer_url ?? `${ARCSCAN_BASE}/tx/${entry.tx_hash}`}
+              href={entry.explorer_url ?? `${MANTLE_EXPLORER_BASE}/tx/${entry.tx_hash}`}
               target="_blank"
               className="font-mono text-xs text-pantheon-gold underline-offset-4 hover:underline"
             >
-              tx {entry.tx_hash ? `${entry.tx_hash.slice(0, 10)}…${entry.tx_hash.slice(-6)}` : "on arcscan"}
+              tx {entry.tx_hash ? `${entry.tx_hash.slice(0, 10)}…${entry.tx_hash.slice(-6)}` : "on Mantle"}
             </Link>
           ) : (
             <Link
-              href={`${ARCSCAN_BASE}/address/${PROOF_OF_RESTRAINT_ADDRESS}`}
+              href={`${MANTLE_EXPLORER_BASE}/address/${PROOF_OF_RESTRAINT_ADDRESS}`}
               target="_blank"
               className="font-mono text-xs text-pantheon-marble underline-offset-4 hover:underline"
               title="No on-chain anchor for this proof yet — link points at the contract instead."
             >
-              contract on arcscan
+              contract on Mantle
             </Link>
           )}
         </dd>

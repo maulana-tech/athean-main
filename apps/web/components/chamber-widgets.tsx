@@ -4,7 +4,7 @@
  * Chamber widgets — evidence-first replacements for the prior decorative
  * versions. Three units:
  *
- *  - CouncilPulse      : live Arc Testnet heartbeat. Polls block height
+ *  - CouncilPulse      : live Mantle Sepolia heartbeat. Polls block height
  *                        and the two on-chain counters (PoR.nextProofId
  *                        and VisitorWitness.total) every 12 s. Replaces
  *                        the prior decorative ChamberClock.
@@ -60,9 +60,9 @@ const DECISIONS = [
   },
 ];
 
-const ARC_RPC = "https://rpc.testnet.arc.network";
-const POR_CONTRACT = "0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895";
-const VW_CONTRACT = "0xF35B1fa5A6026C61C187881eA17d77F97Cd1AFA7";
+const MANTLE_RPC = "https://rpc.sepolia.mantle.xyz";
+const POR_CONTRACT = process.env.NEXT_PUBLIC_PROOF_OF_RESTRAINT_ADDRESS ?? "";
+const VW_CONTRACT  = process.env.NEXT_PUBLIC_VISITOR_WITNESS_ADDRESS ?? "";
 // keccak("nextProofId()")[:4] and keccak("total()")[:4].
 const NEXT_PROOF_ID_SELECTOR = "0x6a627842";
 const TOTAL_SELECTOR = "0x2ddbd13a";
@@ -92,7 +92,7 @@ const RULES = [
 
 async function callRpc(method: string, params: unknown[]): Promise<string | null> {
   try {
-    const r = await fetch(ARC_RPC, {
+    const r = await fetch(MANTLE_RPC, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
@@ -105,10 +105,9 @@ async function callRpc(method: string, params: unknown[]): Promise<string | null
 }
 
 /**
- * ChamberClock — formerly a decorative meander dial. Now a live Arc
- * Testnet pulse widget showing block height + the two on-chain
- * counters that gate the dashboard feeds. Polls every 12 seconds.
- * Name kept for backward-compat with existing imports.
+ * ChamberClock — live Mantle Sepolia pulse widget showing block height
+ * + the two on-chain counters that gate the dashboard feeds. Polls
+ * every 12 seconds. Name kept for backward-compat with existing imports.
  */
 export function ChamberClock({ className }: { className?: string }) {
   const [block, setBlock] = useState<number | null>(null);
@@ -150,7 +149,7 @@ export function ChamberClock({ className }: { className?: string }) {
             block === null ? "bg-amber-500" : "animate-pulse bg-emerald-400",
           )}
         />
-        Arc · live
+        Mantle · live
       </div>
       <Pulse label="Block" value={block === null ? "—" : block.toLocaleString()} />
       <Pulse
@@ -160,7 +159,7 @@ export function ChamberClock({ className }: { className?: string }) {
       <Pulse label="Visits" value={visits === null ? "—" : visits.toString()} />
       <p className="font-serif text-[11px] italic leading-[1.5] text-muted-foreground">
         Polled directly from{" "}
-        <code className="font-mono">rpc.testnet.arc.network</code>.
+        <code className="font-mono">rpc.sepolia.mantle.xyz</code>.
       </p>
     </div>
   );

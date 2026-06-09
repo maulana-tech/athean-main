@@ -2,7 +2,7 @@
 
 When Areopagus rejects a thesis post-deliberation, this module fires a
 ``declineTrade(bytes32,string,string,string)`` transaction at the deployed
-``ProofOfRestraint`` contract on Arc Testnet. The Redis stream remains the
+``ProofOfRestraint`` contract on Mantle Sepolia. The Redis stream remains the
 source of truth — chain writes are best-effort, fire-and-forget, and never
 block the consumer loop.
 
@@ -87,7 +87,7 @@ class RestraintChainWriter:
         address = os.environ.get("PROOF_OF_RESTRAINT_ADDRESS", "").strip()
         rpc = os.environ.get("RPC_URL", "").strip()
         pk = os.environ.get("PRIVATE_KEY", "").strip()
-        chain_id = int(os.environ.get("CHAIN_ID", "5042002"))
+        chain_id = int(os.environ.get("CHAIN_ID", "5003"))
         explorer = os.environ.get("ARC_EXPLORER_URL", "").strip() or None
         if not address or not rpc or not pk:
             return None

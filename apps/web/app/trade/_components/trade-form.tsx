@@ -15,7 +15,7 @@ const TRADE_INTENT_ADDRESS = ((process.env.NEXT_PUBLIC_TRADE_INTENT_ADDRESS as A
   "0x3a900a5c996ffd76bcfa1a266fbb42307ea7c5cd") as Address;
 
 const USDC_TOKEN_ARC = "0x0000000000000000000000000000000000000001" as Address;
-const ARCSCAN = "https://testnet.arcscan.app";
+const MANTLE_EXPLORER = "https://explorer.sepolia.mantle.xyz";
 
 // Minimal ABI for TradeIntent.submit.
 const TRADE_INTENT_ABI = [

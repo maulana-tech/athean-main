@@ -21,9 +21,10 @@ number_underscore = "thousands"
 multiline_func_header = "params_first"
 
 [rpc_endpoints]
-arc_testnet = "https://rpc.testnet.arc.network"
-arc_testnet_drpc = "https://arc-testnet.drpc.org"
+mantle_sepolia = "https://rpc.sepolia.mantle.xyz"
+mantle_mainnet = "https://rpc.mantle.xyz"
 local = "http://localhost:8545"
 
 [etherscan]
-arc_testnet = { key = "${ARCSCAN_KEY}", url = "https://testnet.arcscan.app/api", chain = 5042002 }
+mantle_sepolia = { key = "${MANTLESCAN_KEY}", url = "https://api.routescan.io/v2/network/testnet/evm/5003/etherscan", chain = 5003 }
+mantle_mainnet = { key = "${MANTLESCAN_KEY}", url = "https://api.mantlescan.xyz/api",                               chain = 5000 }

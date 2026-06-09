@@ -11,7 +11,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Pantheon Trades",
     short_name: "Pantheon",
     description:
-      "An eleven-agent AI council debates every prediction-market trade. Every restraint is anchored on Circle's Arc Testnet.",
+      "An eleven-agent AI council debates every prediction-market trade. Every restraint is anchored on Circle's Mantle Sepolia.",
     start_url: "/",
     display: "standalone",
     background_color: "#08090d",

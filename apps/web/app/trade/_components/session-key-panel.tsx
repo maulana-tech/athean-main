@@ -62,7 +62,7 @@ export function SessionKeyPanel({
         domain: {
           name: "PantheonTrades.SessionKey",
           version: "1",
-          chainId: 5042002,
+          chainId: 5003,
           verifyingContract: TRADE_INTENT_ADDRESS,
         },
         types: {

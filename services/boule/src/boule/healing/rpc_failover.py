@@ -6,7 +6,7 @@ from collections.abc import Iterable
 
 
 DEFAULT_ENDPOINTS = (
-    "https://rpc.testnet.arc.network",
+    "https://rpc.sepolia.mantle.xyz",
     "https://arc-testnet.drpc.org",
 )
 

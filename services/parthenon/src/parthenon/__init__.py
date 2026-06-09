@@ -1,7 +1,7 @@
 """Parthenon — archival service for Pantheon Trades.
 
 Pins thesis bundles to IPFS, mirrors permanent copies to Irys, and anchors
-their Merkle root on Arc Testnet via the ``ThesisRegistry`` contract. The
+their Merkle root on Mantle Sepolia via the ``ThesisRegistry`` contract. The
 ``Archive`` class is the single entry point — every other service routes
 its archival writes through it.
 """
