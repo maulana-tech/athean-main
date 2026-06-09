@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
  * pre-hydration script in <head> prevents the first-paint flash.
  */
 export function ThemeToggle({ className }: { className?: string }) {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
 
   useEffect(() => {
     const root = document.documentElement;
@@ -91,7 +91,7 @@ export const themeInitScript = `
   try {
     var stored = localStorage.getItem('pantheon-theme');
     var prefers = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    var theme = stored || 'dark';
+    var theme = stored || 'light';
     var root = document.documentElement;
     if (theme === 'light') { root.classList.add('light'); root.classList.remove('dark'); }
     else { root.classList.add('dark'); root.classList.remove('light'); }

@@ -70,6 +70,14 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Chart semantic tokens
+        chart: {
+          "1": "hsl(var(--chart-1))",
+          "2": "hsl(var(--chart-2))",
+          "3": "hsl(var(--chart-3))",
+          "4": "hsl(var(--chart-4))",
+          "5": "hsl(var(--chart-5))",
+        },
         // Pantheon palette retained for legacy class names
         pantheon: {
           ink: "#0a0e16",
@@ -79,9 +87,9 @@ const config: Config = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "0",
+        md: "0",
+        sm: "0",
       },
       keyframes: {
         "accordion-down": {
@@ -92,10 +100,37 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "shimmer-slide": {
+          to: { transform: "translate(calc(100cqw - 100%), 0)" },
+        },
+        "spin-around": {
+          "0%":       { transform: "translateZ(0) rotate(0)" },
+          "15%, 35%": { transform: "translateZ(0) rotate(90deg)" },
+          "65%, 85%": { transform: "translateZ(0) rotate(270deg)" },
+          "100%":     { transform: "translateZ(0) rotate(360deg)" },
+        },
+        "shine": {
+          "0%":   { backgroundPosition: "0% 0%" },
+          "50%":  { backgroundPosition: "100% 100%" },
+          "100%": { backgroundPosition: "0% 0%" },
+        },
+        "marquee": {
+          from: { transform: "translateX(0)" },
+          to:   { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to:   { transform: "translateY(calc(-100% - var(--gap)))" },
+        },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        "accordion-down":    "accordion-down 0.2s ease-out",
+        "accordion-up":      "accordion-up 0.2s ease-out",
+        "shimmer-slide":     "shimmer-slide var(--speed, 3s) ease-in-out infinite alternate",
+        "spin-around":       "spin-around calc(var(--speed, 3s) * 2) infinite linear",
+        "shine":             "shine var(--duration, 2s) infinite linear",
+        "marquee":           "marquee var(--duration, 40s) infinite linear",
+        "marquee-vertical":  "marquee-vertical var(--duration, 40s) linear infinite",
       },
     },
   },

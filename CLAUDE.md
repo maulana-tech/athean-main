@@ -1,37 +1,84 @@
-# Athean Trades — Claude Code Instructions
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project
 
-AI prediction market trading system. Multi-agent council of Greek-god-named agents debates trades before execution on Polymarket CLOB. Everything is traced, archived on-chain, and scored.
+AI prediction market trading system. An eleven-agent council of Greek-god-named agents debates trades before execution on Polymarket CLOB. All decisions — including restraint — are traced, archived on-chain, and scored.
 
 ## Monorepo
 
-pnpm workspaces + Turborepo. Python services use uv. Never mix pip with uv.
+pnpm workspaces + Turborepo for JS/TS. Python services use uv. Never mix pip with uv.
+
+`just` is the preferred task runner (over `make`):
 
 ```bash
-pnpm install          # install all JS deps
-pnpm dev              # start all apps in dev mode
-pnpm test             # run all tests
-cd contracts && forge test   # Solidity tests
+just install          # pnpm install + uv sync --all-packages
+just dev              # turbo run dev --parallel
+just test             # pnpm test + forge test
+just test-service <svc>  # cd services/<svc> && uv run pytest -q
+just lint             # ruff check + pnpm lint + forge fmt --check
+just fmt              # ruff check --fix + ruff format
+just up / just down   # docker compose up/down
+just logs <service>   # docker compose logs -f <service>
+just migrate          # alembic upgrade head (in apps/api)
+just migrate-revision "msg"  # create a new alembic revision
+just halmos           # Halmos symbolic checks for Solidity invariants
+just mutmut           # mutation tests on financial modules
 ```
+
+Equivalent Makefile targets exist for everything above (`make install`, `make test`, etc.).
 
 ## Python Services
 
 Each service under `services/` and `apps/api/` uses uv:
+
 ```bash
-cd services/boule && uv run pytest
+cd services/boule && uv run pytest          # run all tests for a service
+cd services/boule && uv run pytest tests/test_debate.py::test_quorum -xvs  # single test
 cd services/apollo && uv run python -m apollo.cli
 ```
 
+Solidity:
+
+```bash
+forge test --root contracts                           # all contract tests
+forge test --root contracts --match-test test_pause  # single test
+```
+
+## Architecture
+
+Data flows in one direction through the pipeline:
+
+```
+Pythia (data oracle) → Apollo (signal scoring) → Boule (multi-agent debate)
+  → Areopagus (risk gate) → Strategos (execution) → Argos (position monitor)
+  → Ostrakon (scoring) / Parthenon (archive) / Elysium (backtest)
+```
+
+**Boule** runs the council: 11 Claude-named agents each produce a `Thesis`, the council votes, Boule emits a `Verdict`. Supported LLM providers: `anthropic`, `gemini`, `openai`, `openrouter`, `groq`, `together`, `deepseek`, `xai`, `ollama`, `lm_studio`, `openai_compat` — set via `BOULE_LLM_PROVIDER`.
+
+**Areopagus** is the mandatory risk gate — no trade can reach Strategos without its approval. Kelly sizing, drawdown limits, and correlation guards live here.
+
+**Parthenon** is the only allowed path to IPFS/Irys. Other services must never call IPFS directly.
+
+**Moirai** enforces lifecycle rules across services (see `docs/MOIRAI_LAWS.md`).
+
+**Chronos** is the scheduler that triggers market scans and deliberation cycles.
+
+**Underworld** handles post-mortems on failed trades.
+
+**Olympus** governs system goals and adversarial mode.
+
 ## Key Conventions
 
-- Signals: typed Pydantic models, always validated at source (Pythia)
-- Theses: structured JSON following `docs/THESIS_SCHEMA.md`
-- Traces: every Boule run emits a `TraceEvent` per agent step — see `docs/TRACE_FORMAT.md`
-- Risk policy: all position limits live in `docs/RISK_POLICY.md` and enforced by Areopagus
-- No trade without Areopagus approval
-- Every archive op goes through Parthenon — no direct IPFS calls from other services
-- Agent prompts are Markdown files in `services/boule/src/boule/prompts/`
+- **Signals**: typed Pydantic models, always validated at source (Pythia) — see `docs/SIGNAL_SPEC.md`
+- **Theses**: structured JSON — see `docs/THESIS_SCHEMA.md`
+- **Traces**: every Boule run emits a `TraceEvent` per agent step — see `docs/TRACE_FORMAT.md`
+- **Risk policy**: position limits live in `docs/RISK_POLICY.md` and are enforced by Areopagus
+- **Agent prompts**: Markdown files in `services/boule/src/boule/prompts/`
+- **Execution mode**: controlled by `EXECUTION_MODE=paper|live|auto`
+- **Shared Python types**: `packages/athean-core` — editable-installed into every service
 
 ## Services Port Map
 
@@ -54,21 +101,25 @@ cd services/apollo && uv run python -m apollo.cli
 
 ## Environment
 
-Copy `.env.example` files before running. Required vars:
+Copy `.env.example` before running. Key variables:
+
 - `ANTHROPIC_API_KEY` — Claude API for agent intelligence
 - `POLYMARKET_API_KEY` — CLOB trading
 - `DATABASE_URL` — PostgreSQL
 - `REDIS_URL` — pub/sub and cache
 - `IPFS_API_URL` — IPFS node
 - `IRYS_KEY` — Irys bundler for permanent storage
-- `PRIVATE_KEY` — Polygon wallet for on-chain ops
-- `RPC_URL` — Polygon RPC
+- `PRIVATE_KEY` — Polygon/Arc wallet
+- `RPC_URL` — Arc Testnet RPC
+- `BOULE_LLM_PROVIDER` — LLM backend for the council
+- `EXECUTION_MODE` — `paper` / `live` / `auto`
+
+Contracts have their own `.env.example` under `contracts/`.
 
 ## Docs Index
 
-Full design docs are in `docs/`. Key entry points:
 - `docs/ARCHITECTURE.md` — system design
-- `docs/AGENTS.md` — agent roster
+- `docs/AGENTS.md` — agent roster and responsibilities
 - `docs/CONSTITUTION.md` — immutable system rules
 - `docs/SIGNAL_SPEC.md` — signal schema
 - `docs/THESIS_SCHEMA.md` — thesis structure
@@ -76,6 +127,7 @@ Full design docs are in `docs/`. Key entry points:
 - `docs/TRACE_FORMAT.md` — trace event schema
 - `docs/SETTLEMENT_FLOW.md` — on-chain settlement
 - `docs/MOIRAI_LAWS.md` — lifecycle rules
+- `docs/PROOF_OF_RESTRAINT.md` — on-chain no-trade recording
 
 ## Never Do
 
