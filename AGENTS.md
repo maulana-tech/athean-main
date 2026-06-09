@@ -8,8 +8,26 @@ Athean Trades: AI prediction market trading system. Eleven-agent council debates
 
 - **JS**: pnpm workspaces + Turborepo. Apps under `apps/`, shared packages under `packages/`.
 - **Python**: Each service under `services/` has its own `uv` env + `pyproject.toml`. Never mix pip with uv.
-- **Contracts**: Foundry under `contracts/`. Solidity 0.8.24.
+- **Contracts**: Foundry under `contracts/`. Solidity 0.8.24, `cancun` EVM, OpenZeppelin + forge-std.
 - `.npmrc` sets `node-linker=hoisted` — do not change.
+
+## Task Runners
+
+`just` is preferred over `make` (cross-platform, same targets). Both work.
+
+```bash
+just install          # pnpm install + uv sync --all-packages
+just dev              # turbo run dev --parallel
+just test             # pnpm test + forge test
+just test-service <svc>  # cd services/<svc> && uv run pytest -q
+just lint             # ruff check + pnpm lint + forge fmt --check
+just fmt              # ruff check --fix + ruff format
+just up / just down   # docker compose up/down
+just logs <service>   # docker compose logs -f <service>
+just migrate          # alembic upgrade head (in apps/api)
+just halmos           # Halmos symbolic checks
+just mutmut           # mutation tests on financial modules
+```
 
 ## Quick Commands
 
@@ -20,7 +38,7 @@ uv sync --all-packages          # or: make install
 
 # Dev servers
 pnpm dev                        # all apps in parallel via turbo
-pnpm --filter @athean/web dev # just the Next.js site → localhost:3000
+pnpm --filter @athean/web dev   # just the Next.js site → localhost:3000
 
 # Full verification suite
 make test                       # syntax → forge test → python integration
@@ -68,6 +86,12 @@ uvx ruff check . && pnpm lint && cd contracts && forge fmt --check src test scri
 
 Pre-commit hooks run ruff, forge fmt, gitleaks, and an agent-prompts drift check. Install with `pre-commit install`.
 
+## Web App Verification
+
+```bash
+cd apps/web && pnpm type-check && pnpm build   # typecheck + build
+```
+
 ## Architecture (Data Flow)
 
 ```
@@ -86,6 +110,7 @@ Elysium (backtesting)
 - **No hardcoded keys** — secrets live in `.env` / SOPS + age.
 - **Never modify `PantheonConstitution.sol`** — immutable by design.
 - Agent prompts in `services/boule/src/boule/prompts/*.md` must stay in sync with `apps/web/lib/agent-prompts.ts` (enforced by `tests/check_agent_prompts.py`).
+- Network calls and LLM calls in tests are forbidden — mock at the HTTP layer.
 
 ## Python Conventions
 
@@ -118,8 +143,24 @@ Full port map: `CLAUDE.md`.
 ## Gotchas
 
 - `docker compose up -d` starts Postgres, Redis, IPFS, all services, observability, and backups. Services depend on Redis health — wait for it.
-- `make install` runs `uv sync` per service in a loop — slow on first run.
+- `make install` (or `just install`) runs `uv sync` per service in a loop — slow on first run.
 - Forge tests live in `contracts/test/` — there are 65+ tests across 20 suites plus 12 Halmos symbolic checks.
 - The `tests/` directory at repo root contains cross-service benchmarks and integration tests, not per-service unit tests.
 - Agent prompts are Markdown files that get bundled into the web app. Edit the `.md` files, not the TS bundle.
 - Secrets: `.env.example` shows required vars. Never commit `.env`. SOPS + age for encrypted secrets.
+- Contracts have their own `.env.example` under `contracts/`.
+- `uvx` runs one-off tools without installing globally (e.g. `uvx ruff check .`, `uvx halmos`).
+
+## Docs Index
+
+Key design docs for understanding the system (not exhaustive):
+
+- `docs/ARCHITECTURE.md` — system design and data flow
+- `docs/AGENTS.md` — agent roster, roles, debate structure
+- `docs/CONSTITUTION.md` — immutable system rules
+- `docs/SIGNAL_SPEC.md` — signal schema
+- `docs/THESIS_SCHEMA.md` — thesis structure
+- `docs/RISK_POLICY.md` — position limits and gates
+- `docs/TRACE_FORMAT.md` — trace event schema
+- `docs/MOIRAI_LAWS.md` — lifecycle rules
+- `docs/EDGE_SOURCES.md` — catalogued edge sources with falsification criteria

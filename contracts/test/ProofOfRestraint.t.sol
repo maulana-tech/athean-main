@@ -72,10 +72,9 @@ contract ProofOfRestraintTest is Test {
         assertEq(por.totalProofs(), 3);
     }
 
-    function test_proof_revertsOnUnknown() public view {
+    function test_proof_revertsOnUnknown() public {
         vm.expectRevert();
-        // can't call view in vm.expectRevert directly, so do it via try/catch style:
-        // Instead just verify proof(0) reverts
+        por.proof(999);
     }
 
     function test_adminCanRevoke() public {

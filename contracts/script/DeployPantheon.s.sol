@@ -20,11 +20,11 @@ contract DeployPantheon is Script {
         // Canonical constitution articles from docs/CONSTITUTION.md
         string[] memory ids    = new string[](5);
         string[] memory bodies = new string[](5);
-        ids[0] = "II §1";   bodies[0] = "No position shall exceed five percent of total book equity.";
-        ids[1] = "III §2";  bodies[1] = "Crypto-cluster exposure shall not exceed twelve percent at any time.";
-        ids[2] = "IV §1";   bodies[2] = "No trade where 24-hour volume falls below fifty thousand USDC.";
-        ids[3] = "V §3";    bodies[3] = "Politics positions shall not exceed four percent, sports three, science two.";
-        ids[4] = "VI §1";   bodies[4] = "Kelly is taken at one-half. Never full. Never doubled.";
+        ids[0] = unicode"II §1";   bodies[0] = "No position shall exceed five percent of total book equity.";
+        ids[1] = unicode"III §2";  bodies[1] = "Crypto-cluster exposure shall not exceed twelve percent at any time.";
+        ids[2] = unicode"IV §1";   bodies[2] = "No trade where 24-hour volume falls below fifty thousand USDC.";
+        ids[3] = unicode"V §3";    bodies[3] = "Politics positions shall not exceed four percent, sports three, science two.";
+        ids[4] = unicode"VI §1";   bodies[4] = "Kelly is taken at one-half. Never full. Never doubled.";
 
         vm.startBroadcast(pk);
 
