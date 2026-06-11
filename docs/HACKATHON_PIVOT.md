@@ -92,7 +92,7 @@ Athean is architecturally near-perfect for this track. Most of the hard work is 
 | **CEX execution** | Polymarket CLOB only | Add **Bybit API** (REST + WS) to Strategos |
 | **Market scope** | Prediction markets only | Extend to spot/perp markets via Bybit |
 | **RPC/chain config** | Arc RPC hardcoded | Make chain configurable; default to Mantle |
-| **Brand framing** | "Pantheon Trades on Arc" | "AI Trading Council on Mantle + Bybit" |
+| **Brand framing** | "Athean Trades on Arc" | "AI Trading Council on Mantle + Bybit" |
 
 ---
 
@@ -118,7 +118,7 @@ No logic changes needed. The contracts (`PantheonConstitution.sol`, `ProofOfRest
 
 1. Update `foundry.toml` — add `[rpc_endpoints]` for `mantle_testnet` and `mantle_mainnet`
 2. Update `contracts/.env.example` — `RPC_URL=https://rpc.sepolia.mantle.xyz`, `CHAIN_ID=5003`
-3. Run `forge script DeployPantheon --rpc-url mantle_testnet --broadcast`
+3. Run `forge script DeployAthean --rpc-url mantle_testnet --broadcast`
 4. Update `.env.example` at root with new contract addresses
 5. Update `apps/web/lib/arc-client.ts` → rename to `mantle-client.ts`, point to Mantle RPC
 
