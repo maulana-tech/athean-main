@@ -10,7 +10,7 @@ The numerator is the edge in probability space. The denominator is the
 amount lost per dollar on the unfavourable outcome (price). The same formula
 works for a NO contract — just flip ``q`` to ``1 - q`` and use ``1 - p*``.
 
-We **never** use full Kelly. The Pantheon constitution mandates half-Kelly,
+We **never** use full Kelly. The Athean constitution mandates half-Kelly,
 capped at ``MAX_POSITION_PCT`` of book equity, and we refuse to open any
 position smaller than ``MIN_POSITION_THRESHOLD`` because the gas/slippage
 floor makes microscopic trades net-negative.
