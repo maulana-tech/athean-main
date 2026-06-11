@@ -25,6 +25,20 @@ wheels = [
 ]
 
 [[package]]
+name = "athean-core"
+version = "0.1.0"
+source = { editable = "../../packages/athean-core" }
+dependencies = [
+    { name = "pydantic" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "pydantic", specifier = ">=2.7" }]
+
+[package.metadata.requires-dev]
+dev = [{ name = "pytest", specifier = ">=8" }]
+
+[[package]]
 name = "bitarray"
 version = "3.8.1"
 source = { registry = "https://pypi.org/simple" }
@@ -627,20 +641,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pantheon-core"
-version = "0.1.0"
-source = { editable = "../../packages/pantheon-core" }
-dependencies = [
-    { name = "pydantic" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "pydantic", specifier = ">=2.7" }]
-
-[package.metadata.requires-dev]
-dev = [{ name = "pytest", specifier = ">=8" }]
-
-[[package]]
 name = "parsimonious"
 version = "0.10.0"
 source = { registry = "https://pypi.org/simple" }
@@ -719,6 +719,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/5b/b8/9125d3960748f4f2d41f0e10ae42c29e60f6d3a37b8a758df7375346bf01/py_order_utils-0.3.2.tar.gz", hash = "sha256:4c0ecb939f4ce0313cd8a4ca32f2ba9a72449a6fc9ee17b9ce1937f594662988", size = 10378, upload-time = "2024-07-29T22:54:36.932Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/29/68/b0a971b064b3236fce7307bd5c180409cccd9b207ec459274bdb4e401ec0/py_order_utils-0.3.2-py3-none-any.whl", hash = "sha256:5ab780e61ed532ddda852a6a12d470be7bbdaae01213ced3ebc6c887cedb1d3e", size = 12630, upload-time = "2024-07-29T22:54:35.239Z" },
+]
+
+[[package]]
+name = "pybit"
+version = "5.16.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pycryptodome" },
+    { name = "requests" },
+    { name = "websocket-client" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2c/92/c7c14df206de81d7acb7d7d92180482d8d54c18dc73bf8d1ab73498bdbfc/pybit-5.16.0.tar.gz", hash = "sha256:554a812982e0271ec3a9f9483767ad5ff440d3834f3d363b689c81a0a474ebc0", size = 66764, upload-time = "2026-04-18T13:55:33.058Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/3b/9c37237af574f143cee806801ff37a83b85491cd654046c49caf1d2940a2/pybit-5.16.0-py2.py3-none-any.whl", hash = "sha256:d214c4987aabb25c10e8e031244973a3be4728e044575ab6c6f6f7873f8c1cab", size = 59230, upload-time = "2026-04-18T13:55:31.551Z" },
 ]
 
 [[package]]
@@ -1043,9 +1057,10 @@ name = "strategos"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "athean-core" },
     { name = "httpx" },
-    { name = "pantheon-core" },
     { name = "py-clob-client" },
+    { name = "pybit" },
     { name = "pydantic" },
     { name = "redis", extra = ["hiredis"] },
     { name = "structlog" },
@@ -1062,9 +1077,10 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "athean-core", editable = "../../packages/athean-core" },
     { name = "httpx", specifier = ">=0.27" },
-    { name = "pantheon-core", editable = "../../packages/pantheon-core" },
     { name = "py-clob-client", specifier = ">=0.17" },
+    { name = "pybit", specifier = ">=5.7" },
     { name = "pydantic", specifier = ">=2.7" },
     { name = "redis", extras = ["hiredis"], specifier = ">=5.0" },
     { name = "structlog", specifier = ">=24.1" },
@@ -1134,4 +1150,13 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz", hash = "sha256:231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c", size = 433602, upload-time = "2026-05-07T16:13:18.596Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7f/3e/5db95bcf282c52709639744ca2a8b149baccf648e39c8cc87553df9eae0c/urllib3-2.7.0-py3-none-any.whl", hash = "sha256:9fb4c81ebbb1ce9531cce37674bbc6f1360472bc18ca9a553ede278ef7276897", size = 131087, upload-time = "2026-05-07T16:13:17.151Z" },
+]
+
+[[package]]
+name = "websocket-client"
+version = "1.9.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/2c/41/aa4bf9664e4cda14c3b39865b12251e8e7d239f4cd0e3cc1b6c2ccde25c1/websocket_client-1.9.0.tar.gz", hash = "sha256:9e813624b6eb619999a97dc7958469217c3176312b3a16a4bd1bc7e08a46ec98", size = 70576, upload-time = "2025-10-07T21:16:36.495Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/34/db/b10e48aa8fff7407e67470363eac595018441cf32d5e1001567a7aeba5d2/websocket_client-1.9.0-py3-none-any.whl", hash = "sha256:af248a825037ef591efbf6ed20cc5faa03d3b47b9e5a2230a529eeee1c1fc3ef", size = 82616, upload-time = "2025-10-07T21:16:34.951Z" },
 ]
