@@ -1,4 +1,4 @@
-"""Alembic environment for Pantheon Trades.
+"""Alembic environment for Athean Trades.
 
 Async-aware. Reads the database URL from ``athean_api.config.settings``
 so the same env var (``DATABASE_URL``) the live FastAPI app uses also
