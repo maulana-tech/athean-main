@@ -108,7 +108,7 @@ export function ChainTicker() {
           rel="noopener noreferrer"
           className="mono text-muted-foreground transition-colors hover:text-primary"
         >
-          0x4b35…4895
+          0xaCB1…a7Af
         </a>
       </div>
     </div>
