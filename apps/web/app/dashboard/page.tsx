@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Reveal } from "@/components/anim";
+import { BybitFills } from "@/components/bybit-fills";
 
 /**
  * Dashboard is a server component that talks directly to Mantle Sepolia
@@ -319,6 +320,16 @@ export default async function Dashboard() {
               ))}
             </ol>
           )}
+        </div>
+      </Reveal>
+
+      {/* ── Bybit fills — live paper trading results */}
+      <Reveal delay={0.18}>
+        <div>
+          <div className="display mb-4 text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+            Recent fills
+          </div>
+          <BybitFills />
         </div>
       </Reveal>
 
