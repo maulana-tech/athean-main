@@ -320,7 +320,7 @@ contract PantheonTradesTest is Test {
         for (uint256 i = 0; i < wiring.length; ++i) {
             wiring[i] = address(uint160(i + 1));
         }
-        PantheonTrades pantheon = new PantheonTrades(wiring);
+        PantheonTrades Athean = new PantheonTrades(wiring);
         (
             address constitution,
             address thesisRegistry,
