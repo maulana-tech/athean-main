@@ -78,7 +78,7 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        // Pantheon palette retained for legacy class names
+        // Athean palette retained for legacy class names
         pantheon: {
           ink: "#0a0e16",
           parchment: "#f7f3e9",
