@@ -24,14 +24,19 @@ export function BybitFills() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let controller = new AbortController();
+
     async function fetchTrades() {
       try {
-        const res = await fetch(`${API_URL}/trades/?limit=10`);
+        const res = await fetch(`${API_URL}/trades/?limit=10`, {
+          signal: controller.signal,
+        });
         if (!res.ok) throw new Error(`${res.status}`);
         const data = await res.json();
         setTrades(data);
         setError(null);
       } catch (e) {
+        if (e instanceof DOMException && e.name === "AbortError") return;
         setError("Gateway unreachable");
       } finally {
         setLoading(false);
@@ -39,8 +44,14 @@ export function BybitFills() {
     }
 
     fetchTrades();
-    const interval = setInterval(fetchTrades, 12_000);
-    return () => clearInterval(interval);
+    const interval = setInterval(() => {
+      controller = new AbortController();
+      fetchTrades();
+    }, 30_000);
+    return () => {
+      clearInterval(interval);
+      controller.abort();
+    };
   }, []);
 
   if (loading) {
