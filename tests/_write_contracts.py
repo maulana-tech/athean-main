@@ -235,7 +235,7 @@ pragma solidity ^0.8.24;
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 
 /// @title RoleManager
-/// @notice Centralised role administrator. Other Pantheon contracts can read
+/// @notice Centralised role administrator. Other Athean contracts can read
 ///         from this to decide whether a caller is authorised.
 contract RoleManager is AccessControl {
     constructor(address admin) {
@@ -371,7 +371,7 @@ pragma solidity ^0.8.24;
 import {ReputationRegistry} from "./erc8004/ReputationRegistry.sol";
 
 /// @title AgentReputation
-/// @notice Pantheon wrapper around the ERC-8004 ReputationRegistry.
+/// @notice Athean wrapper around the ERC-8004 ReputationRegistry.
 contract AgentReputation is ReputationRegistry {
     constructor(address admin) ReputationRegistry(admin) {}
 }
@@ -978,7 +978,7 @@ import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {ThesisRegistry} from "./ThesisRegistry.sol";
 
 /// @title Parthenon
-/// @notice High-level facade — the Pantheon dashboard imports this and reads
+/// @notice High-level facade — the Athean dashboard imports this and reads
 ///         the underlying registry plus a top-level "archive index" pointer.
 contract Parthenon is AccessControl {
     bytes32 public constant CURATOR_ROLE = keccak256("CURATOR_ROLE");
@@ -1005,7 +1005,7 @@ FILES["PantheonTrades.sol"] = '''// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
 /// @title PantheonTrades
-/// @notice Read-only facade wiring every Pantheon contract address into one
+/// @notice Read-only facade wiring every Athean contract address into one
 ///         on-chain registry. Useful for the dashboard's "system" view and
 ///         for off-chain clients that prefer one source of truth.
 contract PantheonTrades {
