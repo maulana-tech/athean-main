@@ -95,28 +95,27 @@ async def fetch_ticker(symbol: str) -> dict:
 async def run_council(symbol: str, price: float) -> dict | None:
     """Run the Boule council on a symbol and return the thesis."""
     try:
-        from apollo.scorer import score_market
-        from athean_core.schema import MarketSnapshot
+        from apollo.scorer import score_market, MarketSnapshot
 
-        # Create a minimal signal for the council
+        # Create a minimal snapshot for the council
         snapshot = MarketSnapshot(
             market_id=symbol,
-            market_p=0.5,  # neutral prior
-            oracle_probability=0.5,
-            depth_usdc=50_000.0,
-            mid_price=price,
+            question=f"Will {symbol} price go up in the next hour?",
             category="crypto",
+            market_probability=0.5,  # neutral prior
+            bid=price * 0.999,
+            ask=price * 1.001,
+            volume_24h=1_000_000.0,
+            open_interest=500_000.0,
         )
 
-        signal = await score_market(snapshot)
+        signal = score_market(snapshot)
         log.info("bybit_paper.signal", symbol=symbol, signal=signal)
 
-        # TODO: Wire to full Boule council when available
-        # For now, return a simple signal
         return {
             "symbol": symbol,
             "price": price,
-            "signal": signal.model_dump() if hasattr(signal, "model_dump") else str(signal),
+            "signal": signal.model_dump() if hasattr(signal, "model_dump") else signal.__dict__,
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
     except Exception as e:
@@ -162,7 +161,14 @@ def save_results(results: list[dict], cycle: int) -> Path:
         "results": results,
     }
 
-    filename.write_text(json.dumps(data, indent=2))
+    # Convert datetime objects to strings for JSON serialization
+    def serialize_datetime(obj):
+        if hasattr(obj, "isoformat"):
+            return obj.isoformat()
+        raise TypeError(f"Object of type {type(obj).__name__} is not JSON serializable")
+
+    json_str = json.dumps(data, indent=2, default=serialize_datetime)
+    filename.write_text(json_str)
     log.info("bybit_paper.saved", filename=str(filename), results=len(results))
     return filename
 
