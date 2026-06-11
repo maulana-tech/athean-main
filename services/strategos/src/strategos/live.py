@@ -1,4 +1,4 @@
-"""Live trade execution — routes ApprovalTokens to the Polymarket CLOB.
+"""Live trade execution — routes ApprovalTokens to a CLOB backend.
 
 Single responsibility: turn an ``ApprovalToken`` + ``Thesis`` into a signed
 order, submit it, and emit a ``Trade`` record. Position monitoring is
@@ -12,6 +12,8 @@ Hard rules enforced here:
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import structlog
 
 from athean_core.direction import entry_price as direction_entry_price
@@ -19,9 +21,12 @@ from athean_core.schema import ApprovalToken, Thesis, Trade, utc_now
 
 from strategos.execution_mode import choose_execution
 from strategos.polymarket_builder import BuilderConfig, BuilderLedger
-from strategos.polymarket_clob import OrderRequest, OrderResponse, PolymarketClobClient
+from strategos.polymarket_clob import OrderRequest, OrderResponse
 from strategos.slippage import slippage_eats_edge
 from strategos.slippage_learner import SlippageLearner
+
+if TYPE_CHECKING:
+    from strategos.backends.base import ClobClient
 
 log = structlog.get_logger("strategos.live")
 
@@ -29,7 +34,7 @@ log = structlog.get_logger("strategos.live")
 class LiveExecutor:
     def __init__(
         self,
-        clob: PolymarketClobClient,
+        clob: ClobClient,
         portfolio_usdc: float,
         slippage_learner: SlippageLearner | None = None,
         builder_config: BuilderConfig | None = None,
