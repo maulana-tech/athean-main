@@ -23,7 +23,7 @@ export const revalidate = 30;
 
 const MANTLE_RPC = "https://rpc.sepolia.mantle.xyz";
 const MANTLE_EXPLORER = "https://explorer.sepolia.mantle.xyz";
-const POR_CONTRACT = "0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895";
+const POR_CONTRACT = process.env.NEXT_PUBLIC_PROOF_OF_RESTRAINT_ADDRESS ?? "0xaCB12755134900196F8eE4Ae5223e6955B8Aa7Af";
 const VW_CONTRACT =
   process.env.NEXT_PUBLIC_VISITOR_WITNESS_ADDRESS ??
   "0xF35B1fa5A6026C61C187881eA17d77F97Cd1AFA7";
