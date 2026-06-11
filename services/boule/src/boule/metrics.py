@@ -1,4 +1,4 @@
-"""Prometheus metrics for the Pantheon council.
+"""Prometheus metrics for the Athean council.
 
 Lazy registration — if ``prometheus_client`` is installed we register
 real metrics; otherwise every helper degrades to a no-op so the
