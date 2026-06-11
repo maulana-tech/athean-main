@@ -8,19 +8,21 @@ const onVercel = !!process.env.VERCEL;
 const config = {
   output: onVercel ? undefined : "standalone",
   reactStrictMode: true,
-  // Pre-existing dashboard pages have implicit-any patterns that the
-  // marketing demo deploy doesn't need to chase. The dedicated
-  // `pnpm type-check` script still surfaces them.
+  compress: true,
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
-  // Classical-theme hero/section imagery served from Unsplash's CDN
-  // (no asset weight in the repo, no API key needed for static URLs).
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "api.iconify.design" },
       { protocol: "https", hostname: "upload.wikimedia.org" },
     ],
+  },
+  experimental: {
+    // Tree-shake icon/animation imports at the module level so only
+    // used exports land in the client bundle.
+    optimizePackageImports: ["lucide-react", "framer-motion"],
   },
 };
 
