@@ -10,6 +10,7 @@ up and start monitoring exits.
 
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 from typing import Any
@@ -120,7 +121,42 @@ async def _build_router() -> Strategos:
             live = LiveExecutor(clob=clob, portfolio_usdc=DEFAULT_PORTFOLIO)
         except Exception as e:  # noqa: BLE001
             log.warning("strategos.consumer.live_disabled", error=str(e))
+    elif mode in ("bybit_paper", "bybit_live"):
+        try:
+            from strategos.backends.bybit import BybitClobClient
+
+            clob = BybitClobClient()
+            live = LiveExecutor(clob=clob, portfolio_usdc=DEFAULT_PORTFOLIO)
+        except Exception as e:  # noqa: BLE001
+            log.warning("strategos.consumer.bybit_disabled", error=str(e))
     return Strategos(paper=paper, live=live, mode=mode)  # type: ignore[arg-type]
+
+
+def _make_get_open_trades(redis: aioredis.Redis):
+    """Create a callable that fetches open trades from Redis."""
+
+    async def get_open_trades() -> list:
+        from athean_core.schema import Trade
+
+        # Scan for all trade keys
+        trades = []
+        cursor = 0
+        while True:
+            cursor, keys = await redis.scan(cursor, match="strategos:trade:*", count=100)
+            for key in keys:
+                raw = await redis.get(key)
+                if raw:
+                    try:
+                        trade = Trade.model_validate_json(raw)
+                        if trade.status in ("filled", "partial", "pending"):
+                            trades.append(trade)
+                    except Exception:
+                        pass
+            if cursor == 0:
+                break
+        return trades
+
+    return get_open_trades
 
 
 async def _process(
@@ -184,6 +220,19 @@ async def consume_forever(
     http = httpx.AsyncClient(timeout=15.0)
     router = await _build_router()
 
+    # Start Bybit settlement watcher if in Bybit mode
+    settlement_task = None
+    if router.mode in ("bybit_paper", "bybit_live"):
+        from strategos.bybit_settlement import BybitSettlementWatcher
+
+        bybit_watcher = BybitSettlementWatcher(
+            redis=redis,
+            bybit_client=router._live._clob,  # type: ignore[union-attr]
+            get_open_trades=_make_get_open_trades(redis),
+        )
+        settlement_task = asyncio.create_task(bybit_watcher.run_forever())
+        log.info("strategos.consumer.settlement_watcher_started", mode=router.mode)
+
     await _ensure_group(redis)
     log.info("strategos.consumer.start", consumer=consumer_name, mode=router.mode)
 
@@ -220,5 +269,7 @@ async def consume_forever(
                         continue
                     await redis.xack(APPROVALS_STREAM, CONSUMER_GROUP, entry_id)
     finally:
+        if settlement_task is not None:
+            settlement_task.cancel()
         await http.aclose()
         await redis.aclose()
