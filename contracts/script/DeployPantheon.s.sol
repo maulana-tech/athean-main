@@ -9,10 +9,10 @@ import "../src/erc8004/AgentPassport.sol";
 import "../src/Parthenon.sol";
 import "../src/Ostrakon.sol";
 
-/// @notice Deploys the core Pantheon contracts on Mantle Sepolia.
+/// @notice Deploys the core Athean contracts on Mantle Sepolia.
 /// @dev Run via: just deploy-mantle
 ///      Populate deployments/mantle-sepolia.json with the printed addresses.
-contract DeployPantheon is Script {
+contract DeployAthean is Script {
     function run() external {
         uint256 pk      = vm.envUint("PRIVATE_KEY");
         address deployer = vm.addr(pk);
@@ -37,7 +37,7 @@ contract DeployPantheon is Script {
 
         vm.stopBroadcast();
 
-        console.log("=== Pantheon Deployment (Mantle Sepolia) ===");
+        console.log("=== Athean Deployment (Mantle Sepolia) ===");
         console.log("PantheonConstitution:", address(constitution));
         console.log("ThesisRegistry:      ", address(thesis));
         console.log("SignalRegistry:      ", address(signal));
