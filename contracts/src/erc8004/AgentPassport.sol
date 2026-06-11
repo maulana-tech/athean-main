@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
 /// @title AgentPassport
-/// @notice ERC-721 identity NFT for each Pantheon AI agent (ERC-8004 pattern).
+/// @notice ERC-721 identity NFT for each Athean AI agent (ERC-8004 pattern).
 ///         One token per named agent. Immutable after minting — agents cannot
 ///         transfer their passport; it is soul-bound to the deployer address.
 contract AgentPassport is ERC721, AccessControl {
@@ -25,7 +25,7 @@ contract AgentPassport is ERC721, AccessControl {
 
     event PassportIssued(uint256 indexed tokenId, string name, string role, string modelId);
 
-    constructor(address admin) ERC721("Pantheon Agent Passport", "PAP") {
+    constructor(address admin) ERC721("Athean Agent Passport", "PAP") {
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(MINTER_ROLE, admin);
         _nextTokenId = 1;
