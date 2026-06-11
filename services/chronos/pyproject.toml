@@ -2,7 +2,7 @@
 name = "chronos"
 version = "0.1.0"
 requires-python = ">=3.12"
-description = "Pantheon scheduler — periodically triggers market scans and deliberations."
+description = "Athean scheduler — periodically triggers market scans and deliberations."
 dependencies = [
     "athean-core",
     "pydantic>=2.7",
