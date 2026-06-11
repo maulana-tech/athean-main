@@ -98,7 +98,7 @@ class OpenAICompatClient(LLMClient):
                     "OPENROUTER_HTTP_REFERER",
                     "https://github.com/NAME0x0/Pantheon-Trades",
                 ),
-                "X-Title": "Pantheon Trades",
+                "X-Title": "Athean Trades",
             },
         )
         self._semaphore = asyncio.Semaphore(MAX_PARALLEL)
