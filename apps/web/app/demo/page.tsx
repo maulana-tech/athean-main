@@ -10,32 +10,32 @@ import { WalletConnect } from "./wallet-connect";
 import { WitnessButton } from "./witness-button";
 
 export const metadata = {
-  title: "Demo — Pantheon Council deliberation",
+  title: "Demo — Athean Council deliberation",
   description:
     "Replay a captured Gemini council deliberation: eleven agents, four rounds, Areopagus verdict, Proof of Restraint.",
 };
 
 const SCENARIOS = {
   "btc-120k-approve": {
-    title: "Pantheon Council — BTC $120k by 2026-12-31",
+    title: "Athean Council — BTC $120k by 2026-12-31",
     label: "Crypto · Approval",
     intro:
       "Identical +17pp edge signal — clean portfolio, no correlated BTC exposure already on the books. Eleven agents deliberate, Themis resizes from raw half-Kelly 10.5% to a category-capped 5% NAV, Areopagus approves. Watch the four rounds and the final size land at the constitutional cap.",
   },
   "btc-120k-restraint": {
-    title: "Pantheon Council — BTC $120k by 2026-12-31",
+    title: "Athean Council — BTC $120k by 2026-12-31",
     label: "Crypto · Proof of Restraint",
     intro:
       "Identical +17pp edge signal — but the portfolio already holds correlated crypto exposure (ETH-3500-Q2 long). Zeus runs the cluster-correlation check, finds the macro-cluster correlation at 0.78 above the 0.65 constitutional ceiling, casts the supreme veto in Round 1. Debate short-circuits. Areopagus writes the Proof of Restraint witness on Arc.",
   },
   "election-2028-approve": {
-    title: "Pantheon Council — US Presidential 2028 (incumbent)",
+    title: "Athean Council — US Presidential 2028 (incumbent)",
     label: "Politics · NO Approval",
     intro:
       "A 2028 election market trades 62% YES for the incumbent. Four data sources (RCP, 538, Polymarket, news) and a –10pp sentiment skew push council toward NO. Approved with a Themis resize from raw half-Kelly 10.5% to a category-capped 3.5% NAV.",
   },
   "nfl-superbowl-restraint": {
-    title: "Pantheon Council — NFL Super Bowl LXIII (Chiefs)",
+    title: "Athean Council — NFL Super Bowl LXIII (Chiefs)",
     label: "Sports · Liquidity Floor Reject",
     intro:
       "Genuine signal but a thin book — $11k 24h volume against a $50k constitutional floor. Solon early-rejects on Article IV §1. No deliberation happens. Restraint witness written.",
