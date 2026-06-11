@@ -215,41 +215,41 @@ function Scale({
 
   return (
     <group ref={root} position={[0, -0.25, 0]} scale={0.85}>
-      {/* pedestal — segments halved 32→16 (recommendation D) */}
+      {/* pedestal */}
       <mesh position={[0, -1.65, 0]} castShadow receiveShadow>
-        <cylinderGeometry args={[0.55, 0.7, 0.25, 16]} />
+        <cylinderGeometry args={[0.55, 0.7, 0.25, 12]} />
         {marble}
       </mesh>
       <mesh position={[0, -1.87, 0]}>
-        <cylinderGeometry args={[0.75, 0.8, 0.18, 16]} />
+        <cylinderGeometry args={[0.75, 0.8, 0.18, 12]} />
         {marble}
       </mesh>
 
       {/* vertical post */}
       <mesh position={[0, -0.3, 0]} castShadow>
-        <cylinderGeometry args={[0.06, 0.07, 2.5, 16]} />
+        <cylinderGeometry args={[0.06, 0.07, 2.5, 8]} />
         {marble}
       </mesh>
 
       {/* finial */}
       <mesh position={[0, 1.05, 0]} castShadow>
-        <sphereGeometry args={[0.13, 16, 16]} />
+        <sphereGeometry args={[0.13, 10, 8]} />
         {gold}
       </mesh>
 
       {/* tilting beam group — rotates in z */}
       <group ref={beam} position={[0, 0.95, 0]}>
         <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
-          <cylinderGeometry args={[0.05, 0.05, 2.6, 16]} />
+          <cylinderGeometry args={[0.05, 0.05, 2.6, 8]} />
           {gold}
         </mesh>
         {/* beam end caps */}
         <mesh position={[1.3, 0, 0]} castShadow>
-          <sphereGeometry args={[0.085, 16, 16]} />
+          <sphereGeometry args={[0.085, 8, 6]} />
           {gold}
         </mesh>
         <mesh position={[-1.3, 0, 0]} castShadow>
-          <sphereGeometry args={[0.085, 16, 16]} />
+          <sphereGeometry args={[0.085, 8, 6]} />
           {gold}
         </mesh>
         {/* chains — hang straight down from the beam end caps */}
@@ -278,8 +278,7 @@ function Pan() {
   return (
     <group>
       <mesh castShadow receiveShadow>
-        {/* segments halved 32→16, torus ring 48→24 (recommendation D) */}
-        <cylinderGeometry args={[0.5, 0.34, 0.08, 16, 1, false]} />
+        <cylinderGeometry args={[0.5, 0.34, 0.08, 12, 1, false]} />
         <meshStandardMaterial
           color="#d4a85e"
           roughness={0.25}
@@ -288,7 +287,7 @@ function Pan() {
         />
       </mesh>
       <mesh position={[0, 0.04, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.5, 0.014, 8, 24]} />
+        <torusGeometry args={[0.5, 0.014, 6, 16]} />
         <meshStandardMaterial color="#b88a3f" roughness={0.3} metalness={0.95} />
       </mesh>
     </group>
