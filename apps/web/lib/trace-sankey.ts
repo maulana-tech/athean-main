@@ -83,7 +83,7 @@ export function buildTraceSankey(events: TraceEventLike[]): SankeyGraph {
   }
 
   // Final votes -> outcome sinks. Each agent's final round (round 4
-  // by Pantheon convention) is the bridge to outcome. If a vote is
+  // by Athean convention) is the bridge to outcome. If a vote is
   // tagged, use it; otherwise default to ABSTAIN so the link still
   // shows up (kept thin via min weight).
   const finalEvents = agentEvents.filter((e) => e.round === maxRound);
