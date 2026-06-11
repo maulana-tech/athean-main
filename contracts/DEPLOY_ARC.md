@@ -68,7 +68,7 @@ Expected: 21 tests pass.
 ```bash
 cd contracts
 export PRIVATE_KEY=0x...        # your wallet's key
-forge script script/DeployPantheon.s.sol:DeployPantheon \
+forge script script/DeployPantheon.s.sol:DeployAthean \
   --rpc-url arc_testnet \
   -vvv
 ```
@@ -84,7 +84,7 @@ transactions. Make sure the private key has USDC funded.
 ```bash
 cd contracts
 export PRIVATE_KEY=0x...
-forge script script/DeployPantheon.s.sol:DeployPantheon \
+forge script script/DeployPantheon.s.sol:DeployAthean \
   --rpc-url arc_testnet \
   --broadcast \
   -vvv
