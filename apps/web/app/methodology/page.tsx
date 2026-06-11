@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function MethodologyPage() {
   return (
-    <article className="prose-pantheon space-y-12 py-10">
+    <article className="prose-Athean space-y-12 py-10">
       <header className="space-y-5">
         <span className="text-caption text-primary">
           Methodology · the math behind the marketing
