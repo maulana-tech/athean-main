@@ -131,7 +131,7 @@ export function buildPaymentHeader(
 ): string {
   const payload = {
     scheme: "exact",
-    network: "arc-testnet",
+    network: "mantle-sepolia",
     payload: {
       signature,
       authorization: {
