@@ -25,7 +25,7 @@ help:
 	@echo ""
 	@echo "  forge-build     forge build --root contracts"
 	@echo "  forge-test      forge test --root contracts"
-	@echo "  deploy-athean broadcast DeployPantheon to Mantle Sepolia"
+	@echo "  deploy-athean broadcast DeployAthean to Mantle Sepolia"
 	@echo "  deploy-restraint broadcast DeployRestraint to Mantle Sepolia"
 	@echo ""
 	@echo "  clean           remove pycache + node_modules build artifacts"
@@ -80,7 +80,7 @@ mantle-probe:
 
 deploy-athean:
 	@test -n "$$PRIVATE_KEY" || (echo "PRIVATE_KEY env required" && exit 1)
-	forge script --root contracts script/DeployPantheon.s.sol:DeployPantheon \
+	forge script --root contracts script/DeployPantheon.s.sol:DeployAthean \
 		--rpc-url mantle_sepolia --broadcast -vvv
 
 deploy-restraint:
