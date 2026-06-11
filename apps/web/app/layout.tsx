@@ -259,7 +259,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </a>
               <span>·</span>
               <a
-                href="https://explorer.sepolia.mantle.xyz/address/0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895"
+                href="https://explorer.sepolia.mantle.xyz/address/0xaCB12755134900196F8eE4Ae5223e6955B8Aa7Af"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-primary"
