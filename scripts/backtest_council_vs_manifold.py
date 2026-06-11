@@ -1,6 +1,6 @@
 """Falsification harness — does the Boule council beat Manifold consensus?
 
-This is the empirical question that decides if Pantheon Trades is
+This is the empirical question that decides if Athean Trades is
 edge-capable. The setup:
 
   1. Pull N resolved binary markets from Manifold (free API, no key).
