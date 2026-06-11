@@ -1,4 +1,4 @@
-"""SQLAlchemy ORM models for Pantheon Trades.
+"""SQLAlchemy ORM models for Athean Trades.
 
 Mirrors the wire-format schemas from ``athean_core.schema`` into Postgres
 tables. The ORM layer is intentionally narrow: each row is the persistent
