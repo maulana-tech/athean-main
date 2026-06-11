@@ -196,7 +196,7 @@ def _load_prompt(agent_name: str) -> str:
     if p.exists():
         return p.read_text(encoding="utf-8")
     return (
-        f"You are {agent_name}, a Pantheon Trades council agent. "
+        f"You are {agent_name}, a Athean Trades council agent. "
         "Stay in character, reason rigorously, and reply concisely."
     )
 
@@ -318,7 +318,7 @@ async def _confirm_zeus_veto(signal: Signal, primary_block: ThesisBlock | None) 
         )
         try:
             result = await second.complete(
-                system="You are a Pantheon constitutional reviewer.",
+                system="You are a Athean constitutional reviewer.",
                 messages=[{"role": "user", "content": question}],
                 max_tokens=128,
             )
