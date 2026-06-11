@@ -2,7 +2,7 @@
 
 /**
  * Circle stack panel — surfaces every Circle developer-platform
- * primitive Pantheon uses, with concrete repo paths so anyone reading
+ * primitive Athean uses, with concrete repo paths so anyone reading
  * the site can verify by `grep`. Pure static content; no fetches.
  */
 
