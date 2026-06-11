@@ -1,4 +1,4 @@
-"""Run a single end-to-end Pantheon deliberation against a live LLM.
+"""Run a single end-to-end Athean deliberation against a live LLM.
 
   1. Loads .env (PRIVATE_KEY, GEMINI_API_KEY or ANTHROPIC_API_KEY).
   2. Picks the LLM provider from BOULE_LLM_PROVIDER (defaults to anthropic;
