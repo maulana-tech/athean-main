@@ -555,7 +555,7 @@ export default function Home() {
               <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-3 text-sm md:grid-cols-3">
                 <KV k="onchain_proof_id" v="1" />
                 <KV k="reason" v="ZEUS_VETO" />
-                <KV k="contract" v="0x4b35…4895" />
+                <KV k="contract" v="0xaCB1…a7Af" />
               </div>
               <a
                 href={`${MANTLE_EXPLORER_BASE}/tx/${FIRST_PROOF_TX}`}
@@ -885,7 +885,7 @@ function LiveWitnessStat() {
 
   useEffect(() => {
     const rpc = "https://rpc.sepolia.mantle.xyz";
-    const contract = "0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895";
+    const contract = "0xaCB12755134900196F8eE4Ae5223e6955B8Aa7Af";
     // function selector for nextProofId() → 0x...; precompute keccak("nextProofId()")[:4]
     // = 0x6a627842. Standard ABI; safe to hardcode.
     const data = "0x6a627842";
