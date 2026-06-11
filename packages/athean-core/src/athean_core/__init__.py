@@ -1,4 +1,4 @@
-"""Shared primitives and Pydantic schemas for Pantheon Trades services.
+"""Shared primitives and Pydantic schemas for Athean Trades services.
 
 Wire-format definitions used across services live here so that no service is
 forced to depend on another service's package. Anything published over Redis,
