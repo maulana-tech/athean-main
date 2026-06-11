@@ -1,4 +1,4 @@
-// Thin fetch helpers for the Pantheon Trades FastAPI gateway.
+// Thin fetch helpers for the Athean Trades FastAPI gateway.
 
 const API_BASE =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
