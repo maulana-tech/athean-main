@@ -104,7 +104,7 @@ mantle-probe:
 
 # Deploy contracts to Mantle Sepolia testnet.
 deploy-mantle:
-    forge script --root contracts script/DeployPantheon.s.sol:DeployPantheon \
+    forge script --root contracts script/DeployPantheon.s.sol:DeployAthean \
         --rpc-url mantle_sepolia --broadcast -vvv
 
 # Deploy ProofOfRestraint to Mantle Sepolia testnet.
