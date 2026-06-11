@@ -237,7 +237,7 @@ ROUND_INSTRUCTIONS = {
 def load_prompt(name: str) -> str:
     p = PROMPTS / f"{name}.md"
     if not p.exists():
-        return f"You are {name}, a Pantheon Trades council agent. Reply concisely, in character."
+        return f"You are {name}, a Athean Trades council agent. Reply concisely, in character."
     return p.read_text(encoding="utf-8")
 
 
