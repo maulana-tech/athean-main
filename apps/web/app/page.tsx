@@ -199,10 +199,15 @@ export default function Home() {
   const { scrollYProgress } = useScroll({ target: pageRef, offset: ["start start", "end end"] });
   const easedScroll = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const [heroScroll, setHeroScroll] = useState(0);
+  const lastScrollTs = useRef(0);
   useMotionValueEvent(easedScroll, "change", (v) => {
-    // Throttle React updates to ~20Hz — the underlying useFrame inside
-    // R3F runs at 60Hz regardless and lerps off the cached value.
-    setHeroScroll(v);
+    // Throttle React re-renders to ~20 Hz — useFrame in R3F lerps the
+    // actual rotation at 60fps from the cached heroScroll value.
+    const now = performance.now();
+    if (now - lastScrollTs.current > 50) {
+      lastScrollTs.current = now;
+      setHeroScroll(v);
+    }
   });
 
   return (
