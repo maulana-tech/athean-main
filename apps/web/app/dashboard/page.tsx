@@ -218,7 +218,7 @@ export default async function Dashboard() {
           <div className="display mb-4 flex items-baseline justify-between text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
             <span>On-chain restraint feed</span>
             <a
-              href={`${ARCSCAN}/address/${POR_CONTRACT}`}
+              href={`${MANTLE_EXPLORER}/address/${POR_CONTRACT}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary transition-colors hover:text-primary/70"
@@ -251,7 +251,7 @@ export default async function Dashboard() {
                     </div>
                   </div>
                   <a
-                    href={`${ARCSCAN}/tx/${r.txHash}`}
+                    href={`${MANTLE_EXPLORER}/tx/${r.txHash}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="display shrink-0 text-[10px] uppercase tracking-[0.32em] text-muted-foreground transition-colors hover:text-primary"
@@ -271,7 +271,7 @@ export default async function Dashboard() {
           <div className="display mb-4 flex items-baseline justify-between text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
             <span>Visitor witness feed</span>
             <a
-              href={`${ARCSCAN}/address/${VW_CONTRACT}`}
+              href={`${MANTLE_EXPLORER}/address/${VW_CONTRACT}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary transition-colors hover:text-primary/70"
@@ -309,7 +309,7 @@ export default async function Dashboard() {
                     </div>
                   </div>
                   <a
-                    href={`${ARCSCAN}/tx/${v.txHash}`}
+                    href={`${MANTLE_EXPLORER}/tx/${v.txHash}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="display shrink-0 text-[10px] uppercase tracking-[0.32em] text-muted-foreground transition-colors hover:text-primary"
