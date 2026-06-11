@@ -15,7 +15,7 @@ This module is a thin async client. Operator-facing surface:
     cross-chain transfer.
 
 The actual chain-side execution lives in Circle's SDK. We expose the
-*intent* layer so the rest of Pantheon stays chain-agnostic and the
+*intent* layer so the rest of Athean stays chain-agnostic and the
 tests don't need a real Gateway endpoint.
 """
 
