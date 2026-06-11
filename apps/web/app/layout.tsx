@@ -211,7 +211,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               />
               <div className="flex flex-col leading-none">
                 <span className="display text-base font-semibold tracking-[0.32em] text-foreground">
-                  PANTHEON
+                  ATHEAN
                 </span>
                 <span className="display mt-1 text-[10px] font-medium tracking-[0.45em] text-primary">
                   TRADES
@@ -242,7 +242,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="rule mx-auto mb-10 max-w-xs" />
           <div className="text-center">
             <div className="display mb-6 text-[10px] uppercase tracking-[0.45em] text-primary/80">
-              ✦  ΠΑΝΘΕΟΝ  ✦  ΤRADES  ✦
+              ✦  ΑΘΕΑΝ  ✦  ΤRADES  ✦
             </div>
             <p className="serif mx-auto max-w-xl text-base italic leading-relaxed text-muted-foreground">
               &ldquo;The council deliberates. Areopagus gates. Parthenon anchors on Mantle Sepolia.
@@ -250,7 +250,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </p>
             <div className="mono mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] uppercase tracking-[0.25em] text-muted-foreground/60">
               <a
-                href="https://github.com/NAME0x0/Pantheon-Trades"
+                href="https://github.com/maulana-tech/athean-main"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-primary"
