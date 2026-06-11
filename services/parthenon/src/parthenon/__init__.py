@@ -1,4 +1,4 @@
-"""Parthenon — archival service for Pantheon Trades.
+"""Parthenon — archival service for Athean Trades.
 
 Pins thesis bundles to IPFS, mirrors permanent copies to Irys, and anchors
 their Merkle root on Mantle Sepolia via the ``ThesisRegistry`` contract. The
