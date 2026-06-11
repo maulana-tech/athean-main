@@ -7,7 +7,7 @@
 
 ---
 
-## Pantheon Core Contracts
+## Athean Core Contracts
 
 Deployed via `DeployPantheon.s.sol` — block `39816558`
 
