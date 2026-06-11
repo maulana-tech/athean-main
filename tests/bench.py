@@ -1,4 +1,4 @@
-"""End-to-end benchmark for the Pantheon Trades stack.
+"""End-to-end benchmark for the Athean Trades stack.
 
 Probes correctness + speed without external services:
 
@@ -593,7 +593,7 @@ def bench_argos() -> Section:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
-    print("Pantheon Trades — full-stack bench")
+    print("Athean Trades — full-stack bench")
     print(f"started_at = {datetime.now(timezone.utc).isoformat()}")
 
     sections: list[Section] = []
