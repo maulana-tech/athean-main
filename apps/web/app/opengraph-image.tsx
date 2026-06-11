@@ -11,7 +11,7 @@ import { ImageResponse } from "next/og";
  */
 
 export const runtime = "edge";
-export const alt = "Pantheon Trades — A council of eleven gods debates every trade.";
+export const alt = "Athean Trades — A council of eleven gods debates every trade.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -53,7 +53,7 @@ export default async function OG() {
                 backgroundColor: "#d4a85e",
               }}
             />
-            Pantheon Trades · Mantle Sepolia · chain 5003
+            Athean Trades · Mantle Sepolia · chain 5003
           </div>
           <div
             style={{
