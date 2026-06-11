@@ -147,7 +147,7 @@ def test_violated_verb_form_fires():
 
 
 def test_violates_present_tense_fires():
-    text = "This trade violates the Pantheon Constitution Article 7."
+    text = "This trade violates the Athean Constitution Article 7."
     assert _is_early_veto(_block(text)) is True
 
 
