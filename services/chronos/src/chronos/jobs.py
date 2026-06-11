@@ -1,7 +1,7 @@
 """Built-in jobs Chronos can schedule.
 
 Each job is an async function with no arguments. They reach into the
-rest of the Pantheon stack via Redis Streams and HTTP — there is no
+rest of the Athean stack via Redis Streams and HTTP — there is no
 direct Python import from the consumer-side services so Chronos stays
 deployable independently.
 """
