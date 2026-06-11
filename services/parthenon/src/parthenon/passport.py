@@ -7,7 +7,7 @@ council agent. It carries:
   * version   — bumped on each material capability change
   * metadata_cid — IPFS CID of the agent's prompt + config + scoring history
   * skills    — terse list of capability tags ("bull_advocate", "risk_veto")
-  * issuer    — Pantheon Olympus signing address that authored the passport
+  * issuer    — Athean Olympus signing address that authored the passport
 """
 
 from __future__ import annotations
