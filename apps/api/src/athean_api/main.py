@@ -1,4 +1,4 @@
-"""Pantheon API gateway entrypoint."""
+"""Athean API gateway entrypoint."""
 
 from __future__ import annotations
 
@@ -51,7 +51,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Pantheon Trades API",
+    title="Athean Trades API",
     version="0.1.0",
     description="AI-powered prediction market trading council",
     lifespan=lifespan,
