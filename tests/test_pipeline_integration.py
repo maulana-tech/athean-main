@@ -1,6 +1,6 @@
 """End-to-end pipeline test using in-memory fakes.
 
-Exercises the full Pantheon flow without external services:
+Exercises the full Athean flow without external services:
 
   Apollo MarketSnapshot
     -> Apollo score_market (builds Signal)
