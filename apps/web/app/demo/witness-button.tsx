@@ -381,7 +381,7 @@ export function WitnessButton({
               )}
             </div>
             <p className="leading-[1.6] text-emerald-100/85">
-              Your wallet wrote a permanent {`"`}I ran the Pantheon demo{`"`} record to the
+              Your wallet wrote a permanent {`"`}I ran the Athean demo{`"`} record to the
               VisitorWitness contract. The dashboard restraint feed will reflect it on
               its next 30 s revalidate.
             </p>
