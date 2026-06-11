@@ -1,4 +1,4 @@
-# Pantheon Trades — Arc Testnet witness seeder.
+# Athean Trades — Arc Testnet witness seeder.
 #
 # Writes a handful of realistic Proof-of-Restraint witnesses (council
 # declined trades) and VisitorWitness records (visitor demo runs) to
