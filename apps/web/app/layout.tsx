@@ -37,7 +37,7 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Pantheon Trades — A council of eleven gods debates every trade",
+    default: "Athean Trades — A council of eleven gods debates every trade",
     template: "%s · Athean Trades",
   },
   description:
@@ -204,7 +204,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={BRAND_MARK}
-                alt="Pantheon Trades emblem"
+                alt="Athean Trades emblem"
                 width={34}
                 height={34}
                 className="drop-shadow-[0_0_12px_hsl(var(--primary)/0.25)]"
