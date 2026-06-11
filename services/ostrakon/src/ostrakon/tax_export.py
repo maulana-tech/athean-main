@@ -1,6 +1,6 @@
 """Tax CSV export.
 
-Generates an IRS Form 8949-friendly CSV from settled Pantheon trades.
+Generates an IRS Form 8949-friendly CSV from settled Athean trades.
 The export is *informational only* — the operator's accountant /
 tax software ingests it, decides short- vs long-term treatment, and
 files the actual forms.
