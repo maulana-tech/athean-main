@@ -5,7 +5,7 @@ import { useAccount, useConnect, useDisconnect, useChainId, useSwitchChain } fro
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { arcTestnet } from "@/lib/wagmi";
+import { mantleSepolia } from "@/lib/wagmi";
 import { errorMessage } from "@/lib/errors";
 
 function shorten(addr?: string) {
@@ -19,7 +19,7 @@ export function ConnectCard() {
   const chainId = useChainId();
   const { switchChain, isPending: switching, error: switchError } = useSwitchChain();
 
-  const onArc = chainId === arcTestnet.id;
+  const onArc = chainId === mantleSepolia.id;
 
   return (
     <Card className="border-primary/30">
@@ -80,7 +80,7 @@ export function ConnectCard() {
             <div className="flex flex-wrap gap-2">
               {!onArc && (
                 <Button
-                  onClick={() => switchChain({ chainId: arcTestnet.id })}
+                  onClick={() => switchChain({ chainId: mantleSepolia.id })}
                   disabled={switching}
                   variant="outline"
                 >
