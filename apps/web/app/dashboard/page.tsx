@@ -13,7 +13,7 @@ import { BybitFills } from "@/components/bybit-fills";
  *   1. Arc chain status (block height, gas, chain id).
  *   2. On-chain restraint feed — eth_getLogs against the deployed
  *      ProofOfRestraint contract, filtered to the Restrained event sig.
- *   3. Pantheon static facts (council size, veto count, etc.).
+ *   3. Athean static facts (council size, veto count, etc.).
  *
  * Revalidates every 30 s so the page is always recent without hammering
  * the RPC.
