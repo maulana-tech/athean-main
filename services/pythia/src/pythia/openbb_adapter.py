@@ -6,7 +6,7 @@ is ~200 MB of dependencies which is too heavy to vendor here; instead
 this module hits the same upstream endpoints OpenBB hits, but via
 thin direct REST calls.
 
-What this module covers, prioritised by what Pantheon actually needs:
+What this module covers, prioritised by what Athean actually needs:
 
   - **Equity OHLC** via Stooq (free, no key)
   - **FRED macro series** (US Federal Reserve Economic Data)
