@@ -2,7 +2,7 @@
 pragma solidity ^0.8.24;
 
 /// @title PantheonConstitution
-/// @notice Immutable on-chain record of Pantheon trading system rules.
+/// @notice Immutable on-chain record of Athean trading system rules.
 /// @dev Never upgradeable. Articles are sealed at construction and cannot
 ///      be modified. See docs/CONSTITUTION.md for canonical text.
 contract PantheonConstitution {
