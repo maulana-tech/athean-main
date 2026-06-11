@@ -1,4 +1,4 @@
-"""Canonical wire-format schemas for Pantheon Trades.
+"""Canonical wire-format schemas for Athean Trades.
 
 Every model here is JSON-serialisable and round-trip safe through Redis,
 Postgres, IPFS, and the FastAPI gateway. Avoid adding service-specific fields:
