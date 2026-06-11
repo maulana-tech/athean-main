@@ -273,7 +273,7 @@ export function TradeForm({ owner }: { owner: Hex }) {
               ✓ Intent recorded on Arc
             </div>
             <a
-              href={`${ARCSCAN}/tx/${txHash}`}
+              href={`${MANTLE_EXPLORER}/tx/${txHash}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 block break-all font-mono text-xs text-emerald-300 underline-offset-4 hover:underline"
