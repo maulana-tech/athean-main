@@ -138,7 +138,7 @@ If a name confuses you in any document, look here first.
 | **Eleven agents, four rounds** | Bull pair (Ares, Hades), bear pair (Athena, Cassandra), risk triad (Zeus, Solon, Themis), execution triad (Hephaestus, Daedalus, Humans), adversarial dissenter (Eris). Openings → challenges → Athena synthesis → blind votes. |
 | **Two veto powers** | Zeus and Solon can halt a trade unilaterally on a constitutional violation. Early-veto short-circuits the debate to save tokens. |
 | **Half-Kelly with caps** | Areopagus sizes positions using directional edge and a confidence-weighted half-Kelly fraction, then clamps against constitutional position limits and category exposure. |
-| **Proof of Restraint** | When the council declines, Areopagus writes a `Restrained(signalHash, marketId, reasonCode, note)` record to a deployed Solidity contract on Arc. The repo's flagship feature is provably live at [`0x4b35…4895`](https://testnet.arcscan.app/address/0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895). |
+| **Proof of Restraint** | When the council declines, Areopagus writes a `Restrained(signalHash, marketId, reasonCode, note)` record to a deployed Solidity contract on Mantle Sepolia. The repo's flagship feature is provably live at [`0xaCB1…a7Af`](https://explorer.sepolia.mantle.xyz/address/0xaCB12755134900196F8eE4Ae5223e6955B8Aa7Af). |
 | **Pluggable LLMs (11 providers)** | One env var switches Anthropic / Gemini / OpenAI / OpenRouter / Groq / Together / DeepSeek / xAI Grok / Fireworks / local Ollama / local LM Studio / any self-hosted OpenAI-compatible server. See [LLM provider matrix](#llm-provider-matrix). |
 | **Portable identities** | ERC-8004 agent passports — councilors carry their reputation across deployments. |
 | **Self-calibrating** | Agent weights update from realised Brier scores. Platt + isotonic regression recalibrate council probability from outcomes. Slippage learner refines from each fill. The system gets sharper the longer it runs. |
@@ -723,7 +723,7 @@ forge test --root contracts
 
 **(e) Fire one real Proof of Restraint on Arc Testnet.**
 
-Needs `PRIVATE_KEY`, `RPC_URL`, `PROOF_OF_RESTRAINT_ADDRESS` in `.env`. The contract is deployed at [`0x4b35…4895`](https://testnet.arcscan.app/address/0x4b35CE4Bf71B976205f60Fda1EBAb82eD4D34895). USDC is the native gas token on Arc, so you'll need test USDC in your wallet.
+Needs `PRIVATE_KEY`, `RPC_URL`, `PROOF_OF_RESTRAINT_ADDRESS` in `.env`. The contract is deployed at [`0xaCB1…a7Af`](https://explorer.sepolia.mantle.xyz/address/0xaCB12755134900196F8eE4Ae5223e6955B8Aa7Af). MNT is the native gas token on Mantle Sepolia, so you'll need testnet MNT in your wallet.
 
 ```bash
 uv run python tests/dry_run_chain_write.py
