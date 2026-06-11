@@ -8,7 +8,7 @@ import type { MetadataRoute } from "next";
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Pantheon Trades",
+    name: "Athean Trades",
     short_name: "Pantheon",
     description:
       "An eleven-agent AI council debates every prediction-market trade. Every restraint is anchored on Circle's Mantle Sepolia.",
