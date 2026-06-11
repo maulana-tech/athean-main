@@ -6,7 +6,7 @@ export default function Page() {
       </div>
       <h1 className="font-mono text-3xl text-pantheon-parchment">Agora</h1>
       <p className="text-pantheon-marble">
-        This view streams from the live Pantheon backend. Start the FastAPI gateway
+        This view streams from the live Athean backend. Start the FastAPI gateway
         and Redis stack to populate it. For a static walkthrough of the system, visit{" "}
         <a className="text-pantheon-gold hover:underline" href="/demo">/demo</a>.
       </p>
