@@ -2,7 +2,7 @@
 
 ## Project
 
-Athean Trades: AI prediction market trading system. Eleven-agent council debates every trade before Polymarket CLOB execution. On-chain restraint receipts on Arc Testnet.
+Athean Trades: AI prediction market trading system. Eleven-agent council debates every trade before Polymarket CLOB execution. On-chain restraint receipts on Mantle Sepolia.
 
 ## Monorepo
 
