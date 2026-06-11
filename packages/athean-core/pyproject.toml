@@ -1,7 +1,7 @@
 [project]
 name = "athean-core"
 version = "0.1.0"
-description = "Shared Pydantic schemas and primitives for the Pantheon Trades services."
+description = "Shared Pydantic schemas and primitives for the Athean Trades services."
 requires-python = ">=3.12"
 dependencies = [
     "pydantic>=2.7",
