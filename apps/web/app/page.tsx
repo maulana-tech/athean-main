@@ -366,7 +366,7 @@ export default function Home() {
         </Reveal>
         <Reveal delay={0.15}>
           <p className="serif dropcap text-[1.25rem] leading-[1.8] text-muted-foreground">
-            Pantheon Trades is built on a single conviction: discipline is alpha.
+            Athean Trades is built on a single conviction: discipline is alpha.
             Every Polymarket signal flows through a structured four-round
             deliberation between eleven Greek-god-named AI agents. The bulls
             argue the long case. The bears challenge it. The risk triad —
