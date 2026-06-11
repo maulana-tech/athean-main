@@ -4,7 +4,7 @@
 
 Athean Trades is a multi-agent prediction market trading system. A council of specialized AI agents — each embodying a Greek deity archetype — deliberates on every trade before any capital is deployed. Every decision, including the decision not to trade, is cryptographically recorded on-chain.
 
-The system runs on the **Arc Testnet** (Chain ID: 5042002), an EVM-compatible chain operated by Canteen, with USDC as the currency. Polymarket CLOB is the prediction market exchange.
+The system runs on **Mantle Sepolia** testnet (Chain ID: 5003), an EVM-compatible L2 with MNT as the native gas token. Polymarket CLOB is the prediction market exchange.
 
 ## Design Principles
 
@@ -157,7 +157,7 @@ All inter-service messages are typed Pydantic models. Key types:
 
 ## On-Chain Layer
 
-**Arc Testnet** (Chain ID: 5042002, Currency: USDC). See `docs/ARC_INTEGRATION.md`.
+**Mantle Sepolia** (Chain ID: 5003, Native token: MNT).
 
 Contracts in `contracts/src/`:
 
@@ -179,8 +179,8 @@ Contracts in `contracts/src/`:
 | Pub/sub events | Redis streams |
 | Agent cache | Redis |
 | Signal/thesis archive | IPFS (mutable) + Irys (permanent) |
-| On-chain anchor | Arc Testnet smart contracts |
-| Agent passports | ERC-8004 on Arc Testnet |
+| On-chain anchor | Mantle Sepolia smart contracts |
+| Agent passports | ERC-8004 on Mantle Sepolia |
 
 ## Transport
 
