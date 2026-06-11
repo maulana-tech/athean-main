@@ -1,4 +1,4 @@
-"""Pantheon Trades API gateway.
+"""Athean Trades API gateway.
 
 FastAPI application serving the dashboard + admin surfaces. Owns the
 authoritative copy of every service's published artifacts via Postgres
