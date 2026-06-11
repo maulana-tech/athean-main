@@ -52,7 +52,7 @@ export function ChainTicker() {
     }
 
     fetchBlock();
-    timer = setInterval(fetchBlock, 12_000);
+    timer = setInterval(fetchBlock, 30_000);
     return () => {
       cancelled = true;
       clearInterval(timer);
