@@ -11,8 +11,8 @@ contract Parthenon is AccessControl {
 
     struct Anchor {
         bytes32 merkleRoot;
-        string  ipfsCid;
-        string  label;       // e.g. "boule-traces-2026-06-09"
+        string ipfsCid;
+        string label; // e.g. "boule-traces-2026-06-09"
         uint256 anchoredAt;
         address anchoredBy;
     }
@@ -23,7 +23,9 @@ contract Parthenon is AccessControl {
 
     event RootAnchored(uint256 indexed index, bytes32 indexed merkleRoot, string label);
 
-    constructor(address admin) {
+    constructor(
+        address admin
+    ) {
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(ANCHOR_ROLE, admin);
     }
@@ -37,8 +39,8 @@ contract Parthenon is AccessControl {
         index = _count++;
         _anchors[index] = Anchor({
             merkleRoot: merkleRoot,
-            ipfsCid:    ipfsCid,
-            label:      label,
+            ipfsCid: ipfsCid,
+            label: label,
             anchoredAt: block.timestamp,
             anchoredBy: msg.sender
         });
@@ -46,14 +48,20 @@ contract Parthenon is AccessControl {
         emit RootAnchored(index, merkleRoot, label);
     }
 
-    function total() external view returns (uint256) { return _count; }
+    function total() external view returns (uint256) {
+        return _count;
+    }
 
-    function getAnchor(uint256 index) external view returns (Anchor memory) {
+    function getAnchor(
+        uint256 index
+    ) external view returns (Anchor memory) {
         require(index < _count, "out of range");
         return _anchors[index];
     }
 
-    function indexByRoot(bytes32 root) external view returns (uint256) {
+    function indexByRoot(
+        bytes32 root
+    ) external view returns (uint256) {
         uint256 slot = _rootToSlot[root];
         require(slot != 0, "not found");
         return slot - 1;
