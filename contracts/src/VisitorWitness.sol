@@ -11,7 +11,7 @@ contract VisitorWitness is AccessControl {
 
     struct Visit {
         bytes32 visitHash;
-        string  scenario;
+        string scenario;
         uint256 timestamp;
         address visitor;
     }
@@ -20,34 +20,37 @@ contract VisitorWitness is AccessControl {
     mapping(uint256 => Visit) private _visits;
 
     event Witnessed(
-        uint256 indexed index,
-        bytes32 indexed visitHash,
-        string  scenario,
-        address visitor
+        uint256 indexed index, bytes32 indexed visitHash, string scenario, address visitor
     );
 
-    constructor(address admin) {
+    constructor(
+        address admin
+    ) {
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(WITNESS_ROLE, admin);
     }
 
-    function witness(bytes32 visitHash, string calldata scenario)
-        external
-        onlyRole(WITNESS_ROLE)
-    {
+    function witness(
+        bytes32 visitHash,
+        string calldata scenario
+    ) external onlyRole(WITNESS_ROLE) {
         uint256 index = _count++;
         _visits[index] = Visit({
             visitHash: visitHash,
-            scenario:  scenario,
+            scenario: scenario,
             timestamp: block.timestamp,
-            visitor:   msg.sender
+            visitor: msg.sender
         });
         emit Witnessed(index, visitHash, scenario, msg.sender);
     }
 
-    function total() external view returns (uint256) { return _count; }
+    function total() external view returns (uint256) {
+        return _count;
+    }
 
-    function getVisit(uint256 index) external view returns (Visit memory) {
+    function getVisit(
+        uint256 index
+    ) external view returns (Visit memory) {
         require(index < _count, "out of range");
         return _visits[index];
     }
