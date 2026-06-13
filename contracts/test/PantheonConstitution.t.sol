@@ -26,13 +26,13 @@ contract PantheonConstitutionTest is Test {
 
     function test_firstArticle() public view {
         (string memory id, string memory body) = constitution.article(0);
-        assertEq(id,   unicode"II §1");
+        assertEq(id, unicode"II §1");
         assertEq(body, "No position shall exceed five percent of total book equity.");
     }
 
     function test_lastArticle() public view {
         (string memory id, string memory body) = constitution.article(2);
-        assertEq(id,   unicode"VI §1");
+        assertEq(id, unicode"VI §1");
         assertEq(body, "Kelly is taken at one-half. Never full. Never doubled.");
     }
 
@@ -63,9 +63,9 @@ contract PantheonConstitutionTest is Test {
     }
 
     function test_lengthMismatch_reverts() public {
-        string[] memory badIds   = new string[](1);
+        string[] memory badIds = new string[](1);
         string[] memory badBodies = new string[](2);
-        badIds[0]    = "X";
+        badIds[0] = "X";
         badBodies[0] = "foo";
         badBodies[1] = "bar";
         vm.expectRevert();
