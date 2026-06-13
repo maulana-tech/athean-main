@@ -10,9 +10,9 @@ contract ThesisRegistry is AccessControl {
 
     struct Thesis {
         bytes32 contentHash;
-        string  thesisId;
-        string  marketId;
-        string  ipfsCid;
+        string thesisId;
+        string marketId;
+        string ipfsCid;
         uint256 registeredAt;
         address author;
     }
@@ -23,7 +23,9 @@ contract ThesisRegistry is AccessControl {
 
     event ThesisRegistered(uint256 indexed index, bytes32 indexed contentHash, string thesisId);
 
-    constructor(address admin) {
+    constructor(
+        address admin
+    ) {
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(WRITER_ROLE, admin);
     }
@@ -37,25 +39,31 @@ contract ThesisRegistry is AccessControl {
         require(_hashToSlot[contentHash] == 0, "already registered");
         index = _count++;
         _theses[index] = Thesis({
-            contentHash:  contentHash,
-            thesisId:     thesisId,
-            marketId:     marketId,
-            ipfsCid:      ipfsCid,
+            contentHash: contentHash,
+            thesisId: thesisId,
+            marketId: marketId,
+            ipfsCid: ipfsCid,
             registeredAt: block.timestamp,
-            author:       msg.sender
+            author: msg.sender
         });
         _hashToSlot[contentHash] = index + 1;
         emit ThesisRegistered(index, contentHash, thesisId);
     }
 
-    function total() external view returns (uint256) { return _count; }
+    function total() external view returns (uint256) {
+        return _count;
+    }
 
-    function thesis(uint256 index) external view returns (Thesis memory) {
+    function thesis(
+        uint256 index
+    ) external view returns (Thesis memory) {
         require(index < _count, "out of range");
         return _theses[index];
     }
 
-    function indexByHash(bytes32 contentHash) external view returns (uint256) {
+    function indexByHash(
+        bytes32 contentHash
+    ) external view returns (uint256) {
         uint256 slot = _hashToSlot[contentHash];
         require(slot != 0, "not found");
         return slot - 1;
