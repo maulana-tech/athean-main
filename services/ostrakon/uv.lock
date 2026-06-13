@@ -12,6 +12,20 @@ wheels = [
 ]
 
 [[package]]
+name = "athean-core"
+version = "0.1.0"
+source = { editable = "../../packages/athean-core" }
+dependencies = [
+    { name = "pydantic" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "pydantic", specifier = ">=2.7" }]
+
+[package.metadata.requires-dev]
+dev = [{ name = "pytest", specifier = ">=8" }]
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 source = { registry = "https://pypi.org/simple" }
@@ -164,8 +178,8 @@ name = "ostrakon"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "athean-core" },
     { name = "numpy" },
-    { name = "pantheon-core" },
     { name = "pydantic" },
     { name = "redis", extra = ["hiredis"] },
     { name = "scikit-learn" },
@@ -181,8 +195,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "athean-core", editable = "../../packages/athean-core" },
     { name = "numpy", specifier = ">=1.26" },
-    { name = "pantheon-core", editable = "../../packages/pantheon-core" },
     { name = "pydantic", specifier = ">=2.7" },
     { name = "redis", extras = ["hiredis"], specifier = ">=5.0" },
     { name = "scikit-learn", specifier = ">=1.4" },
@@ -204,20 +218,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/d7/f1/e7a6dd94a8d4a5626
 wheels = [
     { url = "https://files.pythonhosted.org/packages/df/b2/87e62e8c3e2f4b32e5fe99e0b86d576da1312593b39f47d8ceef365e95ed/packaging-26.2-py3-none-any.whl", hash = "sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e", size = 100195, upload-time = "2026-04-24T20:15:22.081Z" },
 ]
-
-[[package]]
-name = "pantheon-core"
-version = "0.1.0"
-source = { editable = "../../packages/pantheon-core" }
-dependencies = [
-    { name = "pydantic" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "pydantic", specifier = ">=2.7" }]
-
-[package.metadata.requires-dev]
-dev = [{ name = "pytest", specifier = ">=8" }]
 
 [[package]]
 name = "pluggy"
