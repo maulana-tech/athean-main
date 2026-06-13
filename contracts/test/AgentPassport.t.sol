@@ -7,15 +7,16 @@ import "../src/erc8004/AgentPassport.sol";
 contract AgentPassportTest is Test {
     AgentPassport passport;
 
-    address admin  = address(0xA1);
+    address admin = address(0xA1);
     address minter = address(0xB2);
-    address user   = address(0xC3);
-    address user2  = address(0xD4);
+    address user = address(0xC3);
+    address user2 = address(0xD4);
 
     function setUp() public {
         passport = new AgentPassport(admin);
+        bytes32 minterRole = passport.MINTER_ROLE();
         vm.prank(admin);
-        passport.grantRole(passport.MINTER_ROLE(), minter);
+        passport.grantRole(minterRole, minter);
     }
 
     function test_issue_returnsTokenId() public {
@@ -34,8 +35,8 @@ contract AgentPassportTest is Test {
         vm.prank(minter);
         passport.issue(user, "apollo", "oracle", "2.0.0", "claude-haiku-4-5");
         AgentPassport.AgentMeta memory m = passport.getMeta(1);
-        assertEq(m.name,    "apollo");
-        assertEq(m.role,    "oracle");
+        assertEq(m.name, "apollo");
+        assertEq(m.role, "oracle");
         assertEq(m.version, "2.0.0");
         assertEq(m.modelId, "claude-haiku-4-5");
         assertGt(m.issuedAt, 0);
@@ -53,8 +54,8 @@ contract AgentPassportTest is Test {
 
     function test_totalIssued() public {
         vm.startPrank(minter);
-        passport.issue(user,  "zeus",   "governance", "1.0.0", "claude-opus-4-7");
-        passport.issue(user2, "hermes", "messenger",  "1.0.0", "claude-sonnet-4-6");
+        passport.issue(user, "zeus", "governance", "1.0.0", "claude-opus-4-7");
+        passport.issue(user2, "hermes", "messenger", "1.0.0", "claude-sonnet-4-6");
         vm.stopPrank();
         assertEq(passport.totalIssued(), 2);
     }
