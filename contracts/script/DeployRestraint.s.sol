@@ -12,14 +12,14 @@ import "../src/VisitorWitness.sol";
 ///      Set PROOF_OF_RESTRAINT_ADDRESS in env to activate chain writes in areopagus.
 contract DeployRestraint is Script {
     function run() external {
-        uint256 pk       = vm.envUint("PRIVATE_KEY");
-        address deployer  = vm.addr(pk);
+        uint256 pk = vm.envUint("PRIVATE_KEY");
+        address deployer = vm.addr(pk);
 
         vm.startBroadcast(pk);
 
         ProofOfRestraint por = new ProofOfRestraint(deployer);
-        NoTradeAlpha     nta = new NoTradeAlpha(deployer);
-        VisitorWitness   vw  = new VisitorWitness(deployer);
+        NoTradeAlpha nta = new NoTradeAlpha(deployer);
+        VisitorWitness vw = new VisitorWitness(deployer);
 
         vm.stopBroadcast();
 
@@ -32,6 +32,6 @@ contract DeployRestraint is Script {
         console.log("");
         console.log("Next: set PROOF_OF_RESTRAINT_ADDRESS =", address(por));
         console.log("      set NEXT_PUBLIC_PROOF_OF_RESTRAINT_ADDRESS =", address(por));
-        console.log("      set NEXT_PUBLIC_VISITOR_WITNESS_ADDRESS =",    address(vw));
+        console.log("      set NEXT_PUBLIC_VISITOR_WITNESS_ADDRESS =", address(vw));
     }
 }
