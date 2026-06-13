@@ -7,14 +7,15 @@ import "../src/ProofOfRestraint.sol";
 contract ProofOfRestraintTest is Test {
     ProofOfRestraint por;
 
-    address admin    = address(0xA1);
+    address admin = address(0xA1);
     address recorder = address(0xB2);
     address stranger = address(0xC3);
 
     function setUp() public {
         por = new ProofOfRestraint(admin);
+        bytes32 recorderRole = por.RECORDER_ROLE();
         vm.prank(admin);
-        por.grantRole(por.RECORDER_ROLE(), recorder);
+        por.grantRole(recorderRole, recorder);
     }
 
     function test_nextProofIdStartsAtOne() public view {
@@ -40,11 +41,11 @@ contract ProofOfRestraintTest is Test {
 
         ProofOfRestraint.Proof memory p = por.proof(1);
         assertEq(p.signalHash, sig);
-        assertEq(p.marketId,   "ETH-USD");
+        assertEq(p.marketId, "ETH-USD");
         assertEq(p.reasonCode, "SPREAD");
-        assertEq(p.note,       "spread 8%");
-        assertEq(p.recorder,   recorder);
-        assertGt(p.timestamp,  0);
+        assertEq(p.note, "spread 8%");
+        assertEq(p.recorder, recorder);
+        assertGt(p.timestamp, 0);
     }
 
     function test_declineTrade_emitsEvent() public {
