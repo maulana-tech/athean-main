@@ -14,9 +14,9 @@ contract ProofOfRestraint is AccessControl {
 
     struct Proof {
         bytes32 signalHash;
-        string  marketId;
-        string  reasonCode;
-        string  note;
+        string marketId;
+        string reasonCode;
+        string note;
         uint256 timestamp;
         address recorder;
     }
@@ -27,12 +27,14 @@ contract ProofOfRestraint is AccessControl {
     event TradeDeclined(
         uint256 indexed proofId,
         bytes32 indexed signalHash,
-        string  marketId,
-        string  reasonCode,
+        string marketId,
+        string reasonCode,
         address recorder
     );
 
-    constructor(address admin) {
+    constructor(
+        address admin
+    ) {
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(RECORDER_ROLE, admin);
         _nextProofId = 1;
@@ -48,11 +50,11 @@ contract ProofOfRestraint is AccessControl {
         proofId = _nextProofId++;
         _proofs[proofId] = Proof({
             signalHash: signalHash,
-            marketId:   marketId,
+            marketId: marketId,
             reasonCode: reasonCode,
-            note:       note,
-            timestamp:  block.timestamp,
-            recorder:   msg.sender
+            note: note,
+            timestamp: block.timestamp,
+            recorder: msg.sender
         });
         emit TradeDeclined(proofId, signalHash, marketId, reasonCode, msg.sender);
     }
@@ -62,7 +64,9 @@ contract ProofOfRestraint is AccessControl {
         return _nextProofId;
     }
 
-    function proof(uint256 proofId) external view returns (Proof memory) {
+    function proof(
+        uint256 proofId
+    ) external view returns (Proof memory) {
         require(proofId > 0 && proofId < _nextProofId, "unknown proof");
         return _proofs[proofId];
     }
