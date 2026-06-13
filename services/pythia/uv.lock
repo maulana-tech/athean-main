@@ -25,6 +25,20 @@ wheels = [
 ]
 
 [[package]]
+name = "athean-core"
+version = "0.1.0"
+source = { editable = "../../packages/athean-core" }
+dependencies = [
+    { name = "pydantic" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "pydantic", specifier = ">=2.7" }]
+
+[package.metadata.requires-dev]
+dev = [{ name = "pytest", specifier = ">=8" }]
+
+[[package]]
 name = "certifi"
 version = "2026.4.22"
 source = { registry = "https://pypi.org/simple" }
@@ -240,20 +254,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pantheon-core"
-version = "0.1.0"
-source = { editable = "../../packages/pantheon-core" }
-dependencies = [
-    { name = "pydantic" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "pydantic", specifier = ">=2.7" }]
-
-[package.metadata.requires-dev]
-dev = [{ name = "pytest", specifier = ">=8" }]
-
-[[package]]
 name = "pluggy"
 version = "1.6.0"
 source = { registry = "https://pypi.org/simple" }
@@ -421,8 +421,8 @@ name = "pythia"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "athean-core" },
     { name = "httpx" },
-    { name = "pantheon-core" },
     { name = "praw" },
     { name = "pydantic" },
     { name = "redis", extra = ["hiredis"] },
@@ -439,8 +439,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "athean-core", editable = "../../packages/athean-core" },
     { name = "httpx", specifier = ">=0.27" },
-    { name = "pantheon-core", editable = "../../packages/pantheon-core" },
     { name = "praw", specifier = ">=7.7" },
     { name = "pydantic", specifier = ">=2.7" },
     { name = "redis", extras = ["hiredis"], specifier = ">=5.0" },
