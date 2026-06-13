@@ -19,6 +19,14 @@ const config = {
       { protocol: "https", hostname: "upload.wikimedia.org" },
     ],
   },
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      "@react-native-async-storage/async-storage": false,
+      "pino-pretty": false,
+    };
+    return config;
+  },
   experimental: {
     // Tree-shake icon/animation imports at the module level so only
     // used exports land in the client bundle.
