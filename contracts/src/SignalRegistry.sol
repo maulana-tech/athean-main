@@ -10,10 +10,10 @@ contract SignalRegistry is AccessControl {
 
     struct Signal {
         bytes32 signalHash;
-        string  signalId;
-        string  marketId;
-        string  band;        // STRONG_YES / YES / PASS / NO / STRONG_NO
-        int256  edgeBps;     // expected value in basis points, signed
+        string signalId;
+        string marketId;
+        string band; // STRONG_YES / YES / PASS / NO / STRONG_NO
+        int256 edgeBps; // expected value in basis points, signed
         uint256 createdAt;
         address emitter;
     }
@@ -23,13 +23,12 @@ contract SignalRegistry is AccessControl {
     mapping(bytes32 => uint256) private _hashToSlot; // 0 = absent, else index+1
 
     event SignalEmitted(
-        uint256 indexed index,
-        bytes32 indexed signalHash,
-        string  signalId,
-        string  band
+        uint256 indexed index, bytes32 indexed signalHash, string signalId, string band
     );
 
-    constructor(address admin) {
+    constructor(
+        address admin
+    ) {
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(WRITER_ROLE, admin);
     }
@@ -45,25 +44,31 @@ contract SignalRegistry is AccessControl {
         index = _count++;
         _signals[index] = Signal({
             signalHash: signalHash,
-            signalId:   signalId,
-            marketId:   marketId,
-            band:       band,
-            edgeBps:    edgeBps,
-            createdAt:  block.timestamp,
-            emitter:    msg.sender
+            signalId: signalId,
+            marketId: marketId,
+            band: band,
+            edgeBps: edgeBps,
+            createdAt: block.timestamp,
+            emitter: msg.sender
         });
         _hashToSlot[signalHash] = index + 1;
         emit SignalEmitted(index, signalHash, signalId, band);
     }
 
-    function total() external view returns (uint256) { return _count; }
+    function total() external view returns (uint256) {
+        return _count;
+    }
 
-    function signal(uint256 index) external view returns (Signal memory) {
+    function signal(
+        uint256 index
+    ) external view returns (Signal memory) {
         require(index < _count, "out of range");
         return _signals[index];
     }
 
-    function indexByHash(bytes32 signalHash) external view returns (uint256) {
+    function indexByHash(
+        bytes32 signalHash
+    ) external view returns (uint256) {
         uint256 slot = _hashToSlot[signalHash];
         require(slot != 0, "not found");
         return slot - 1;
