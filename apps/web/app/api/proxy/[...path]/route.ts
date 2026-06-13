@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = "edge";
-
 const API_UPSTREAM = process.env.API_UPSTREAM ?? "http://43.129.54.139:8000";
 
 async function proxy(req: NextRequest, params: { path?: string[] }) {
