@@ -19,7 +19,10 @@ contract PantheonConstitution {
 
     event ArticleSealed(uint256 indexed index, string id);
 
-    constructor(string[] memory ids, string[] memory bodies) {
+    constructor(
+        string[] memory ids,
+        string[] memory bodies
+    ) {
         require(ids.length == bodies.length, "length mismatch");
         require(ids.length > 0, "empty constitution");
         for (uint256 i = 0; i < ids.length; i++) {
@@ -34,7 +37,9 @@ contract PantheonConstitution {
         return _articles.length;
     }
 
-    function article(uint256 index) external view returns (string memory id, string memory body) {
+    function article(
+        uint256 index
+    ) external view returns (string memory id, string memory body) {
         require(index < _articles.length, "out of range");
         Article storage a = _articles[index];
         return (a.id, a.body);
